@@ -30,7 +30,8 @@ define("port", default=5000, help="run on the given port", type=int)
 graphenedb_url = os.environ.get("GRAPHENEDB_URL", "http://localhost:7474/")
 service_root = neo4j.ServiceRoot(URI(graphenedb_url).resolve("/"))
 graph_db = service_root.graph_db
-session = cypher.Session("http://localhost:7474")
+session = cypher.Session()
+
 
 # application settings and handle mapping info
 class Application(tornado.web.Application):
