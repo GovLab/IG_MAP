@@ -15,3 +15,7 @@ venv
 
 # silly stuff
 .svn
+
+#secret stuff
+.env
+.gitignore

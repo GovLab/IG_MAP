@@ -15,6 +15,9 @@ import tornado.ioloop
 import tornado.options
 import tornado.web
 
+from py2neo import neo4j
+from py2neo.packages.urimagic import URI
+
 # import and define tornado-y things
 from tornado.options import define
 define("port", default=5000, help="run on the given port", type=int)
@@ -37,11 +40,6 @@ class Application(tornado.web.Application):
 # the main page
 class MainHandler(tornado.web.RequestHandler):
     def get(self, q):
-        if 'GOOGLEANALYTICSID' in os.environ:
-            google_analytics_id = os.environ['GOOGLEANALYTICSID']
-        else:
-            google_analytics_id = False
-
         self.render(
             "main.html",
             page_title='Heroku Funtimes',
