@@ -30,7 +30,7 @@ define("port", default=5000, help="run on the given port", type=int)
 graphenedb_url = os.environ.get("GRAPHENEDB_URL", "http://localhost:7474/")
 service_root = neo4j.ServiceRoot(URI(graphenedb_url).resolve("/"))
 graph_db = service_root.graph_db
-session = cypher.Session(URI(graphenedb_url).resolve("/"))
+session = cypher.Session()
 
 
 # application settings and handle mapping info
@@ -59,12 +59,14 @@ class MainHandler(tornado.web.RequestHandler):
         tx.append("MATCH n RETURN n")
         results = tx.execute()
         nodes = []
+        logging.info(results[0])
         for r in results[0]:
             nodes.append({"name":str(r.values[0]['name']), "group":str(r.values[0]['type']), "node":str(r.values[0]['node_id'])}) 
         links = []
         tx = session.create_transaction()
         tx.append("START r=rel(*)  RETURN r")
         results = tx.execute()
+        logging.info(results[0])
         for r in results[0]:
             links.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
         self.render(
