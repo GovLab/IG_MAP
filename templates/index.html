@@ -3,7 +3,12 @@
 
 {% block body %}
 
-<h1> {{page_heading}} </h1>
+<div class="header">
+	<h1> {{page_heading}} </h1>
+	<div class="query">
+			<form class="query_form">Search: <input type="text" id="query_input" name="query"></form> <input type="submit" id="submit" value="Submit"></p>
+	</div>
+</div>
 <div class="graph"></div>
 
 <style>
@@ -19,7 +24,6 @@
 }
 
 svg {
-	position: fixed;
 	top: 0px;
 	left: 0px;
 	height: 100%;
@@ -35,6 +39,31 @@ var graph = {
   "links":{{links}}
 }
 
+console.log(graph);
+$('#container').on("click", "#submit", function() {
+	var query =  $('.query_form').serializeArray();
+	$.ajax({
+		type: 'POST',
+		url: '/',
+		data: query,
+		error: function(error) {
+		    console.debug(JSON.stringify(error));
+		},
+		beforeSend: function(xhr, settings) {
+		},
+		success: function(response) {
+			console.log(response['nodes']);
+			graph = {
+		  		"nodes":response['nodes'],
+				"links":response['links']
+			}
+			updateGraph();
+		}
+	});
+})
+
+
+
 var w = $(window).width(),
     h = $(window).height();
 
@@ -47,11 +76,11 @@ graph.links.forEach(function(l) {
     l.target = nodeMap[l.target];
 })
 
-var color = d3.scale.category20().domain(function(d) { return data.nodes.group; });
+var color = d3.scale.category20().domain(function(d) { return graph.nodes.group; });
 
 var force = d3.layout.force()
     .charge(-120)
-    .linkDistance(30)
+    .linkDistance(60)
     .size([w, h]);
 
 var svg = d3.select(".graph").append("svg")
@@ -90,6 +119,54 @@ force = d3.layout.force()
         .attr("cy", function(d) { return h/2 + d.y; });
   });
 
+var updateGraph = function() {
+
+
+	var nodeMap = {};
+
+	graph.nodes.forEach(function(d) { nodeMap[d.node] = d; });
+
+	graph.links.forEach(function(l) {
+		l.source = nodeMap[l.source];
+		l.target = nodeMap[l.target];
+	})
+	console.log(graph);
+	color = d3.scale.category20().domain(function(d) { return data.nodes.group; });
+
+	force.nodes(graph.nodes)
+		.links(graph.links)
+		.start();
+
+	node = svg.selectAll(".node").data(graph.nodes)
+	node.enter().append("circle")
+		.attr("class", "node");
+	node.attr("r", 5)
+		.style("fill", function(d) { return color(d.group); })
+		.call(force.drag)
+
+	node.enter().append("title")
+		.text(function(d) { return d.name; });
+	node.exit().remove();
+
+	link = svg.selectAll(".link").data(graph.links)
+	link.enter()
+		.append("line")
+		.attr("class", "link");
+	link.style("stroke-width", 1)
+	link.exit().remove();
+
+	force.on("tick", function() {
+		link.attr("x1", function(d) { return w/2 + d.source.x; })
+			.attr("y1", function(d) { return h/2 + d.source.y; })
+			.attr("x2", function(d) { return w/2 + d.target.x; })
+			.attr("y2", function(d) { return h/2 + d.target.y; });
+
+	    node.attr("cx", function(d) { return w/2 + d.x; })
+	        .attr("cy", function(d) { return h/2 + d.y; });
+	  });
+
+
+}
 
 </script>
 

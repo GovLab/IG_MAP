@@ -27,15 +27,60 @@ from tornado.options import define
 define("port", default=5000, help="run on the given port", type=int)
 
 #DB
-graphenedb_url = os.environ.get("GRAPHENEDB_URL", "http://localhost:7474/")
-service_root = neo4j.ServiceRoot(URI(graphenedb_url).resolve("/"))
-graph_db = service_root.graph_db
+# graphenedb_url = os.environ.get("GRAPHENEDB_URL", "http://localhost:7474/")
+# service_root = neo4j.ServiceRoot(URI(graphenedb_url).resolve("/"))
+# graph_db = service_root.graph_db
+graph_db = neo4j.GraphDatabaseService()
 session = cypher.Session()
 
+issue_list = [{
+            "issue":"DNS Security",
+            "synonyms":["dns","dns security", "dnssec"]
+        }, 
+        {
+            "issue":"IPv6 Adoption", 
+            "synonyms":["ipv6","ipv6 adoption", "ip"]
+        }, {
+            "issue":"Broadband Promotion", 
+            "synonyms":["broadband","broadband promotion"]
+        }, {
+            "issue":"Child Pornography", 
+            "synonyms":["cp","child pornography", "child porno"]
+        }, {
+            "issue":"Internet Gambling",
+            "synonyms":["internet gambling","gambling"]
+        }]
+relationships = ["address", "addresses" "deals", "deal", "attends", "attend" "focuses", "focus" "undertakes", "tackles", "tackle", "concerning" "sees", "about", "on"]
+type_list = [{
+            "synonyms": ["initiatives", "events", "conferences", "parties", "proposal", "plans", "schemes", "strategies"],
+            "type":"Initiatives & Events"
+        },
+        {
+            "synonyms": ["laws", "policies", "rules", "bylaws", "bills", "decrees", "resolutions", "orders", "procedures"],
+            "type":"Laws & Policies"
+        },
+        {
+            "synonyms": ["organizations", "groups", "firm", "corporation", "association", "society", "institutions", "people", "leaders", "individuals", "humans"],
+            "type":"Actor"
+        }, 
+        {
+            "synonyms": ["research", "investigations", "studies", "study", "findings", "experiments", "analysis", "support", "backing"],
+            "type":"Research & Advocacy"
+        },
+        {
+            "synonyms": ["standards", "protocols", "norms", "guidelines", "criteria", "norms"],
+            "type":"Standards"
+        },
+        {
+            "synonyms": ["tools", "information", "applications", "apps", "instruments", "materials"],
+            "type":"Tools & Resources"
+        }
+        ]
 
 # application settings and handle mapping info
 class Application(tornado.web.Application):
     def __init__(self):
+        self.query_builder = QueryBuilder()
         handlers = [
             (r"/?", MainHandler),
             (r"/load/?", LoadHandler)
@@ -50,25 +95,33 @@ class Application(tornado.web.Application):
 
 # the main page
 class MainHandler(tornado.web.RequestHandler):
-    def get(self):
+    def get(self, query=None):
         if 'GOOGLEANALYTICSID' in os.environ:
             google_analytics_id = os.environ['GOOGLEANALYTICSID']
         else:
             google_analytics_id = False
         tx = session.create_transaction()
-        tx.append("MATCH n RETURN n")
+        if not query:
+            actor = "Actor"
+            relationship = "ADDRESSES"
+            issue = "Child Pornography"
+            query = "MATCH (n)-[r:"+relationship+"]->(m) WHERE n.type=\""+ actor +"\" AND m.name=\""+ issue +"\" RETURN DISTINCT r, n"
+        #tx.append("MATCH n RETURN n")
+        tx.append(query)
         results = tx.execute()
         nodes = []
-        logging.info(results[0])
-        for r in results[0]:
-            nodes.append({"name":str(r.values[0]['name']), "group":str(r.values[0]['type']), "node":str(r.values[0]['node_id'])}) 
         links = []
-        tx = session.create_transaction()
-        tx.append("START r=rel(*)  RETURN r")
-        results = tx.execute()
-        logging.info(results[0])
         for r in results[0]:
+            nodes.append({"name":r.values[0].start_node['name'].encode('utf-8'), "group":r.values[0].start_node['type'].encode('utf-8'), "node":r.values[0].start_node['node_id']}) 
+            nodes.append({"name":r.values[0].end_node['name'].encode('utf-8'), "group":r.values[0].end_node['type'].encode('utf-8'), "node":r.values[0].end_node['node_id']}) 
+            nodes = [dict(t) for t in set([tuple(d.items()) for d in nodes])]
             links.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
+        # tx = session.create_transaction()
+        # tx.append("START r=rel(*)  RETURN r")
+        # results = tx.execute()
+        # logging.info(results[0])
+        # for r in results[0]:
+        #     links.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
         self.render(
             "index.html",
             page_title='Internet Governance Map',
@@ -77,6 +130,41 @@ class MainHandler(tornado.web.RequestHandler):
             links = links,
             google_analytics_id=google_analytics_id,
         )
+    def post(self):
+        query = self.request.arguments['query'][0]
+        query = self.application.query_builder.build(query)
+        tx = session.create_transaction()
+        tx.append(query)
+        results = tx.execute()
+        nodes = []
+        links = []
+        for r in results[0]:
+            nodes.append({"name":r.values[0].start_node['name'].encode('utf-8'), "group":r.values[0].start_node['type'].encode('utf-8'), "node":r.values[0].start_node['node_id']}) 
+            nodes.append({"name":r.values[0].end_node['name'].encode('utf-8'), "group":r.values[0].end_node['type'].encode('utf-8'), "node":r.values[0].end_node['node_id']}) 
+            nodes = [dict(t) for t in set([tuple(d.items()) for d in nodes])]
+            links.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
+        self.write({"nodes":nodes, "links":links})
+
+class QueryBuilder(object):
+    def build(self, query):
+        q = query.split()
+        rel = [s for s in relationships if s in q]
+        rel_word = q.index(rel[0])
+        cat = ''
+        issue = ''
+        for typ in type_list:
+            for word in q[0:q.index(rel[0])]:
+                if any(word in s for s in typ['synonyms']):
+                    cat = typ['type']
+        for iss in issue_list:
+            for word in q[rel_word+1:]:
+                if any(word in s for s in iss['synonyms']):
+                    issue = iss['issue']
+        logging.info(rel)
+        logging.info(issue)
+        logging.info(cat)
+        return "MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type=\""+ cat +"\" AND m.name=\""+ issue +"\" RETURN DISTINCT r, n"
+
 
 class LoadHandler(tornado.web.RequestHandler):
     def get(self):
@@ -89,8 +177,8 @@ class LoadHandler(tornado.web.RequestHandler):
                 reader = csv.reader(infile)
                 for row in reader:
                     if row[0] != 'name':
-                        nodes = nodes + ({'name':row[0], 'abbrev':row[1], 'type':row[2], "node_id":index },)
-                        types.append(row[2])
+                        nodes = nodes + ({'name':row[0], 'abbrev':row[3], 'type':row[1], "node_id":index },)
+                        types.append(row[1])
                         index = index + 1
             types = list(set(types))
         except Exception, e:
