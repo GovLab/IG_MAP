@@ -3,14 +3,6 @@
 
 {% block body %}
 
-<div class="header">
-	<h1> {{page_heading}} </h1>
-	<div class="query">
-			<form class="query_form">Search: <input type="text" id="query_input" name="query"></form> <input type="submit" id="submit" value="Submit"></p>
-	</div>
-</div>
-<div class="graph"></div>
-
 <style>
 
 .node {
@@ -30,7 +22,21 @@ svg {
 	width: 100%;
 }
 
+#query_input {
+	width: 500px;
+}
+
 </style>
+
+<div class="header">
+	<h1> {{page_heading}} </h1>
+	<div class="query">
+			Search: <input type="text" id="query_input" name="query"><button id="submit" value="Submit">Submit</button></p>
+	</div>
+</div>
+<div class="graph"></div>
+
+
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
@@ -39,17 +45,17 @@ var graph = {
   "links":{{links}}
 }
 
-console.log(graph);
 $('#container').on("click", "#submit", function() {
-	var query =  $('.query_form').serializeArray();
+	var query =  $('#query_input').val();
 	$.ajax({
 		type: 'POST',
 		url: '/',
-		data: query,
+		data: { "query":query },
 		error: function(error) {
 		    console.debug(JSON.stringify(error));
 		},
 		beforeSend: function(xhr, settings) {
+			console.log(query);
 		},
 		success: function(response) {
 			console.log(response['nodes']);
@@ -64,8 +70,8 @@ $('#container').on("click", "#submit", function() {
 
 
 
-var w = $(window).width(),
-    h = $(window).height();
+var w = $(window).width();
+var h = $(window).height();
 
 var nodeMap = {};
 
@@ -106,7 +112,7 @@ force = d3.layout.force()
       .style("fill", function(d) { return color(d.group); })
       .call(force.drag);
 
-  node.append("title")
+  var nodeTitles = node.append("title")
       .text(function(d) { return d.name; });
 
   force.on("tick", function() {
@@ -130,30 +136,34 @@ var updateGraph = function() {
 		l.source = nodeMap[l.source];
 		l.target = nodeMap[l.target];
 	})
-	console.log(graph);
+
 	color = d3.scale.category20().domain(function(d) { return data.nodes.group; });
 
 	force.nodes(graph.nodes)
 		.links(graph.links)
 		.start();
 
+
+
+	link = svg.selectAll(".link").data(graph.links)
+	link.exit().remove();
+	link.enter()
+		.append("line")
+		.attr("class", "link");
+	link.style("stroke-width", 1)
+	
+
 	node = svg.selectAll(".node").data(graph.nodes)
+	node.exit().remove();
 	node.enter().append("circle")
 		.attr("class", "node");
 	node.attr("r", 5)
 		.style("fill", function(d) { return color(d.group); })
 		.call(force.drag)
 
-	node.enter().append("title")
-		.text(function(d) { return d.name; });
-	node.exit().remove();
-
-	link = svg.selectAll(".link").data(graph.links)
-	link.enter()
-		.append("line")
-		.attr("class", "link");
-	link.style("stroke-width", 1)
-	link.exit().remove();
+	nodeTitles = node.append("title")
+		.text(function(d) { console.log(d.name); return d.name; });
+	
 
 	force.on("tick", function() {
 		link.attr("x1", function(d) { return w/2 + d.source.x; })

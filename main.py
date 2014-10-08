@@ -45,7 +45,7 @@ issue_list = [{
             "synonyms":["broadband","broadband promotion"]
         }, {
             "issue":"Child Pornography", 
-            "synonyms":["cp","child pornography", "child porno"]
+            "synonyms":["cp","child pornography", "child porn"]
         }, {
             "issue":"Internet Gambling",
             "synonyms":["internet gambling","gambling"]
@@ -95,43 +95,33 @@ class Application(tornado.web.Application):
 
 # the main page
 class MainHandler(tornado.web.RequestHandler):
-    def get(self, query=None):
+    def get(self):
         if 'GOOGLEANALYTICSID' in os.environ:
             google_analytics_id = os.environ['GOOGLEANALYTICSID']
         else:
             google_analytics_id = False
+        query = "START r=rel(*) RETURN r"
+        #query = "MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type=\"Actor\" AND m.name=\"Broadband Promotion\" RETURN DISTINCT r, n"
         tx = session.create_transaction()
-        if not query:
-            actor = "Actor"
-            relationship = "ADDRESSES"
-            issue = "Child Pornography"
-            query = "MATCH (n)-[r:"+relationship+"]->(m) WHERE n.type=\""+ actor +"\" AND m.name=\""+ issue +"\" RETURN DISTINCT r, n"
-        #tx.append("MATCH n RETURN n")
         tx.append(query)
         results = tx.execute()
         nodes = []
         links = []
         for r in results[0]:
-            nodes.append({"name":r.values[0].start_node['name'].encode('utf-8'), "group":r.values[0].start_node['type'].encode('utf-8'), "node":r.values[0].start_node['node_id']}) 
+            nodes.append({"name":r.values[0].start_node['name'].encode('utf-8'), "group":r.values[0].start_node['type'].encode('utf-8'), "node":r.values[0].start_node['node_id']})
             nodes.append({"name":r.values[0].end_node['name'].encode('utf-8'), "group":r.values[0].end_node['type'].encode('utf-8'), "node":r.values[0].end_node['node_id']}) 
             nodes = [dict(t) for t in set([tuple(d.items()) for d in nodes])]
             links.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
-        # tx = session.create_transaction()
-        # tx.append("START r=rel(*)  RETURN r")
-        # results = tx.execute()
-        # logging.info(results[0])
-        # for r in results[0]:
-        #     links.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
         self.render(
             "index.html",
             page_title='Internet Governance Map',
             page_heading='DAT node map',
             nodes=nodes,
-            links = links,
+            links =links,
             google_analytics_id=google_analytics_id,
         )
     def post(self):
-        query = self.request.arguments['query'][0]
+        query = self.get_argument("query", None)
         query = self.application.query_builder.build(query)
         tx = session.create_transaction()
         tx.append(query)
@@ -143,7 +133,7 @@ class MainHandler(tornado.web.RequestHandler):
             nodes.append({"name":r.values[0].end_node['name'].encode('utf-8'), "group":r.values[0].end_node['type'].encode('utf-8'), "node":r.values[0].end_node['node_id']}) 
             nodes = [dict(t) for t in set([tuple(d.items()) for d in nodes])]
             links.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
-        self.write({"nodes":nodes, "links":links})
+        self.write({"nodes":nodes, "links":links, "query":query})
 
 class QueryBuilder(object):
     def build(self, query):
