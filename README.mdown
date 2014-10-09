@@ -1,0 +1,23 @@
+Install this app
+====
+Requirements: 
+-----
+Neo4j - brew install neo4j  
+Python  
+[pip](http://pip.readthedocs.org/en/latest/installing.html)    
+[foreman](https://rubygems.org/gems/foreman)  
+[virtualenv](http://virtualenv.readthedocs.org/en/latest/virtualenv.html)
+
+
+Procedure:
+----
+In Terminal: 
+
+`git clone https://github.com/GovLab/IG_MAP.git`  
+`cd IG_MAP/`  
+`virtualenv env`  
+`source env/bin/activate`  
+Install dependancies: `pip install -r requirements.txt`   
+Start Neo4j: `neo4j start `  
+`foreman start`  
+In browser: http://localhost:5000/
