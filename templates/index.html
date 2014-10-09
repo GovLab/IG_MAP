@@ -134,7 +134,7 @@ $('#container').on("click", "#submit", function() {
 		  		"nodes":response['nodes'],
 				"links":response['links']
 			}
-			updateGraph();
+			updateGraph(graph);
 		}
 	});
 })
@@ -154,8 +154,8 @@ graph.links.forEach(function(l) {
 var color = d3.scale.category20().domain(function(d) { return graph.nodes.group; });
 
 var force = d3.layout.force()
-    .charge(-120)
-    .linkDistance(60)
+    .charge(-60)
+    .linkDistance(200)
     .size([w, h]);
 
 var svg = d3.select(".graph").append("svg")
@@ -193,7 +193,7 @@ force = d3.layout.force()
   var nodeTitles = node.append("title")
       .text(function(d) { return d.name; });
 
-      node.on("mouseover", function(d) {
+    node.on("mouseover", function(d) {
       	$('.node_name').text(d.name);
       	$('.node_description').text(d.description);
       });
@@ -208,9 +208,9 @@ force = d3.layout.force()
         .attr("cy", function(d) { return h/2 + d.y; });
   });
 
-var updateGraph = function() {
+var updateGraph = function(graph_) {
 
-
+	var graph = graph_;
 	var nodeMap = {};
 
 	graph.nodes.forEach(function(d) { nodeMap[d.node] = d; });
@@ -226,8 +226,6 @@ var updateGraph = function() {
 		.links(graph.links)
 		.start();
 
-
-
 	link = svg.selectAll(".link").data(graph.links)
 	link.exit().remove();
 	link.enter()
@@ -235,7 +233,6 @@ var updateGraph = function() {
 		.attr("class", "link");
 	link.style("stroke-width", 1)
 	
-
 	node = svg.selectAll(".node").data(graph.nodes)
 	node.exit().remove();
 	node.enter().append("circle")
@@ -244,8 +241,8 @@ var updateGraph = function() {
 		.style("fill", function(d) { return color(d.group); })
 		.call(force.drag)
 
-	nodeTitles = node.append("title")
-		.text(function(d) { console.log(d.name); return d.name; });
+	node.select("title")
+		.text(function(d) { return d.name; });
 	
 
 	force.on("tick", function() {

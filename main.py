@@ -109,69 +109,53 @@ class MainHandler(tornado.web.RequestHandler):
         tx = session.create_transaction()
         tx.append(query)
         results = tx.execute()
-        nodes = []
-        links = []
-        track_nodes = []
-        # for r in results[0]:
-        #     if r.values[0].end_node['type'].encode('utf-8') == "Issue":
-        #         nodes.append({
-        #             "name":r.values[0].start_node['name'].encode('utf-8'), 
-        #             "group":r.values[0].start_node['type'].encode('utf-8'),
-        #             "node":r.values[0].start_node['node_id']})
-        #         track_nodes.append(r.values[0].start_node['name'].encode('utf-8'))
-        #     if r.values[0].start_node['name'].encode('utf-8') not in track_nodes:
-        #         track_nodes.append(r.values[0].start_node['name'].encode('utf-8'))
-        #         nodes.append({
-        #             "name":r.values[0].start_node['name'].encode('utf-8'), 
-        #             "group":r.values[0].start_node['type'].encode('utf-8'),
-        #             "description":r.values[0].start_node['description'].encode('utf-8'),
-        #             "node":r.values[0].start_node['node_id']})
-        #     if r.values[0].end_node['name'].encode('utf-8') not in track_nodes:
-        #         track_nodes.append(r.values[0].end_node['name'].encode('utf-8'))
-        #         nodes.append({
-        #             "name":r.values[0].end_node['name'].encode('utf-8'), 
-        #             "group":r.values[0].end_node['type'].encode('utf-8'),
-        #             "description":r.values[0].end_node['description'].encode('utf-8'),
-        #             "node":r.values[0].end_node['node_id']})
-        #     links.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
         # nodes = []
         # links = []
+        # track_nodes = []
         # for r in results[0]:
-        #     nodes.append({
-        #         "name":r.values[0].start_node['name'].encode('utf-8'), 
-        #         "group":r.values[0].start_node['type'].encode('utf-8'), 
-        #         "description":r.values[0].start_node['description'].encode('utf-8'), 
-        #         "node":r.values[0].start_node['node_id']})
-        #     nodes.append({
-        #         "name":r.values[0].end_node['name'].encode('utf-8'), 
-        #         "group":r.values[0].end_node['type'].encode('utf-8'), 
-        #         "description":r.values[0].start_node['description'].encode('utf-8'), 
-        #         "node":r.values[0].end_node['node_id']}) 
-        #     nodes = [dict(t) for t in set([tuple(d.items()) for d in nodes])]
+        #     if r.values[0].start_node['name'].encode('utf-8') not in track_nodes:
+        #         n = {}
+        #         n['name'] = r.values[0].start_node['name'].encode('utf-8')
+        #         n['group'] = r.values[0].start_node['type'].encode('utf-8')
+        #         n['description'] = r.values[0].start_node['description'].encode('utf-8') if 'description' in r.values[0].start_node else ' '
+        #         n['node'] = r.values[0].start_node['node_id']
+        #         track_nodes.append(n['name'])
+        #         nodes.append(n)
+        #     if r.values[0].end_node['name'].encode('utf-8') not in track_nodes:
+        #         n = {}
+        #         n['name'] = r.values[0].end_node['name'].encode('utf-8')
+        #         n['group'] = r.values[0].end_node['type'].encode('utf-8')
+        #         n['description'] = r.values[0].end_node['description'].encode('utf-8') if 'description' in r.values[0].end_node else ' '
+        #         n['node'] = r.values[0].end_node['node_id']
+        #         track_nodes.append(n['name'])
+        #         nodes.append(n)
+        # for r in results[0]:
         #     links.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
-        nodes2 = {}
-        links2 = []
+        #nodes = [dict(t) for t in set([tuple(d.items()) for d in nodes])]
+        nodes = {}
+        links = []
         for r in results[0]:
-            nodes2[r.values[0].start_node['node_id']] = {
+            nodes[r.values[0].start_node['node_id']] = {
                 "name":r.values[0].start_node['name'].encode('utf-8'), 
                 "group":r.values[0].start_node['type'].encode('utf-8'), 
                 "description":r.values[0].start_node['description'].encode('utf-8'), 
                 "node":r.values[0].start_node['node_id']}
-            nodes2[r.values[0].end_node['node_id']] = {
+            description = r.values[0].end_node['description'].encode('utf-8') if 'description' in r.values[0].end_node else ' '
+            nodes[r.values[0].end_node['node_id']] = {
                 "name":r.values[0].end_node['name'].encode('utf-8'), 
                 "group":r.values[0].end_node['type'].encode('utf-8'), 
-                "description":r.values[0].start_node['description'].encode('utf-8'), 
+                "description":description, 
                 "node":r.values[0].end_node['node_id']}
             #nodes2 = [dict(t) for t in set([tuple(d.items()) for d in nodes2])]
             #nodes2 = list(set(nodes))
-            links2.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
-        nodes2 = nodes2.values()
+            links.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
+        nodes = nodes.values()
         self.render(
             "index.html",
             page_title='Internet Governance Map',
             page_heading='Map of Internet Governance',
-            nodes=nodes2,
-            links =links2,
+            nodes=nodes,
+            links =links,
             google_analytics_id=google_analytics_id,
         )
     def post(self):
@@ -234,7 +218,7 @@ class LoadHandler(tornado.web.RequestHandler):
                 reader = csv.reader(infile)
                 for row in reader:
                     if row[0] != 'name':
-                        issues = issues + ({'name':row[0], "type":row[1], "node_id":index},)
+                        issues = issues + ({'name':row[0], "type":row[1], "description":row[2], "node_id":index},)
                         index = index + 1
         except Exception, e:
             print "Could not get issues: " + str(e)
@@ -261,7 +245,7 @@ class LoadHandler(tornado.web.RequestHandler):
 
         #CREATE ISSUE NODES
         for i in issues:
-            n = batch.create(node(node_id=i['node_id'], name=i['name'], type="Issue"))
+            n = batch.create(node(node_id=i['node_id'], name=i['name'], description=i['description'], type="Issue"))
             batch.add_labels(n, 'Issue')
             batch.add_indexed_node(indeces['Issue'], 'node_id', index, n)
 
