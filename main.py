@@ -21,6 +21,10 @@ import re
 from py2neo import neo4j
 from py2neo import node, rel, cypher
 from py2neo.packages.urimagic import URI
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 # import and define tornado-y things
 from tornado.options import define
@@ -107,17 +111,67 @@ class MainHandler(tornado.web.RequestHandler):
         results = tx.execute()
         nodes = []
         links = []
+        track_nodes = []
+        # for r in results[0]:
+        #     if r.values[0].end_node['type'].encode('utf-8') == "Issue":
+        #         nodes.append({
+        #             "name":r.values[0].start_node['name'].encode('utf-8'), 
+        #             "group":r.values[0].start_node['type'].encode('utf-8'),
+        #             "node":r.values[0].start_node['node_id']})
+        #         track_nodes.append(r.values[0].start_node['name'].encode('utf-8'))
+        #     if r.values[0].start_node['name'].encode('utf-8') not in track_nodes:
+        #         track_nodes.append(r.values[0].start_node['name'].encode('utf-8'))
+        #         nodes.append({
+        #             "name":r.values[0].start_node['name'].encode('utf-8'), 
+        #             "group":r.values[0].start_node['type'].encode('utf-8'),
+        #             "description":r.values[0].start_node['description'].encode('utf-8'),
+        #             "node":r.values[0].start_node['node_id']})
+        #     if r.values[0].end_node['name'].encode('utf-8') not in track_nodes:
+        #         track_nodes.append(r.values[0].end_node['name'].encode('utf-8'))
+        #         nodes.append({
+        #             "name":r.values[0].end_node['name'].encode('utf-8'), 
+        #             "group":r.values[0].end_node['type'].encode('utf-8'),
+        #             "description":r.values[0].end_node['description'].encode('utf-8'),
+        #             "node":r.values[0].end_node['node_id']})
+        #     links.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
+        # nodes = []
+        # links = []
+        # for r in results[0]:
+        #     nodes.append({
+        #         "name":r.values[0].start_node['name'].encode('utf-8'), 
+        #         "group":r.values[0].start_node['type'].encode('utf-8'), 
+        #         "description":r.values[0].start_node['description'].encode('utf-8'), 
+        #         "node":r.values[0].start_node['node_id']})
+        #     nodes.append({
+        #         "name":r.values[0].end_node['name'].encode('utf-8'), 
+        #         "group":r.values[0].end_node['type'].encode('utf-8'), 
+        #         "description":r.values[0].start_node['description'].encode('utf-8'), 
+        #         "node":r.values[0].end_node['node_id']}) 
+        #     nodes = [dict(t) for t in set([tuple(d.items()) for d in nodes])]
+        #     links.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
+        nodes2 = {}
+        links2 = []
         for r in results[0]:
-            nodes.append({"name":r.values[0].start_node['name'].encode('utf-8'), "group":r.values[0].start_node['type'].encode('utf-8'), "node":r.values[0].start_node['node_id']})
-            nodes.append({"name":r.values[0].end_node['name'].encode('utf-8'), "group":r.values[0].end_node['type'].encode('utf-8'), "node":r.values[0].end_node['node_id']}) 
-            nodes = [dict(t) for t in set([tuple(d.items()) for d in nodes])]
-            links.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
+            nodes2[r.values[0].start_node['node_id']] = {
+                "name":r.values[0].start_node['name'].encode('utf-8'), 
+                "group":r.values[0].start_node['type'].encode('utf-8'), 
+                "description":r.values[0].start_node['description'].encode('utf-8'), 
+                "node":r.values[0].start_node['node_id']}
+            nodes2[r.values[0].end_node['node_id']] = {
+                "name":r.values[0].end_node['name'].encode('utf-8'), 
+                "group":r.values[0].end_node['type'].encode('utf-8'), 
+                "description":r.values[0].start_node['description'].encode('utf-8'), 
+                "node":r.values[0].end_node['node_id']}
+            #nodes2 = [dict(t) for t in set([tuple(d.items()) for d in nodes2])]
+            #nodes2 = list(set(nodes))
+            links2.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
+        nodes2 = nodes2.values()
         self.render(
             "index.html",
             page_title='Internet Governance Map',
-            page_heading='DAT node map',
-            nodes=nodes,
-            links =links,
+            page_heading='Map of Internet Governance',
+            nodes=nodes2,
+            links =links2,
             google_analytics_id=google_analytics_id,
         )
     def post(self):
@@ -213,7 +267,7 @@ class LoadHandler(tornado.web.RequestHandler):
 
         #CREATE NODES
         for nod in nodes:
-            n = batch.create(node(node_id=nod['node_id'], name=nod['name'].replace('"', ""), abbrev=nod['abbrev'], type=nod['type']))
+            n = batch.create(node(node_id=nod['node_id'], name=nod['name'].replace('"', ""), abbrev=nod['abbrev'], description=nod['description'], type=nod['type']))
             batch.add_labels(n, nod['type'])
             batch.add_indexed_node(indeces[nod['type']],'node_id', nod['node_id'], n)
 

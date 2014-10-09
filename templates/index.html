@@ -4,6 +4,19 @@
 {% block body %}
 
 <style>
+body {
+	background-color: black;
+	font-family: sans-serif, Arial, Helvetica;
+	color: white;
+}
+
+h1 {
+	color: white;
+}
+
+p {
+	color: white;
+}
 
 .node {
   stroke: #fff;
@@ -15,15 +28,67 @@
   stroke-opacity: .6;
 }
 
-svg {
-	top: 0px;
-	left: 0px;
-	height: 100%;
+.graph_area {
 	width: 100%;
 }
 
+.node_info {
+	width: 30%;
+	height: 600px;
+	float: left;
+}
+
+.node_name {
+	font-size: 2em;
+	margin-bottom: 16px;
+}
+
+.graph {
+	width: 70%;
+	height: 600px;
+	float: right;
+}
+
+svg {
+	top: 0px;
+	left: 0px;
+}
+
 #query_input {
-	width: 500px;
+	width: 60%;
+	line-height: 1.25;
+	padding: .556em .5em;
+	border: 1px solid transparent;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	vertical-align: top;
+	font-size: 1.125em;
+	background: #f2f2f2;
+	border-color: transparent;
+	display: inline-block;
+}
+
+#submit {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	display: inline-block;
+	font-size: 1.125em;
+	border:	1px solid #de3723;
+	padding: .556em 1em;
+	background: linear-gradient(to bottom,#fd4f00 0%,#de3723 100%);
+	margin: 0;
+	margin-left: 20px;
+	position: static;
+	top: auto;
+	right: auto;
+	height: auto;
+	line-height: 1.3333em;
+	vertical-align: top;
+	color: white;
 }
 
 </style>
@@ -31,10 +96,16 @@ svg {
 <div class="header">
 	<h1> {{page_heading}} </h1>
 	<div class="query">
-			Search: <input type="text" id="query_input" name="query"><button id="submit" value="Submit">Submit</button></p>
+			<input type="text" id="query_input" name="query" placeholder="What sort of relationships do you want to look up?" onkeydown="if (event.keyCode == 13) $('#submit').click()" autofocus><button type="button" id="submit" value="Submit">Search</button></p>
 	</div>
 </div>
-<div class="graph"></div>
+<div class="graph_area">
+	<div class="node_info">
+		<div class="node_name"></div>
+		<div class="node_description"></div>
+	</div>
+	<div class="graph"></div>
+</div>
 
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -68,10 +139,8 @@ $('#container').on("click", "#submit", function() {
 	});
 })
 
-
-
-var w = $(window).width();
-var h = $(window).height();
+var w = $('.graph').width();
+var h = 600;
 
 var nodeMap = {};
 
@@ -92,6 +161,15 @@ var force = d3.layout.force()
 var svg = d3.select(".graph").append("svg")
     .attr("width", w)
     .attr("height", h);
+
+function updateWindow(){
+    x = w.innerWidth || e.clientWidth || g.clientWidth;
+    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+
+    svg.attr("width", x).attr("height", y);
+}
+window.onresize = updateWindow;
+
 
 force = d3.layout.force()
       .nodes(graph.nodes)
@@ -114,6 +192,11 @@ force = d3.layout.force()
 
   var nodeTitles = node.append("title")
       .text(function(d) { return d.name; });
+
+      node.on("mouseover", function(d) {
+      	$('.node_name').text(d.name);
+      	$('.node_description').text(d.description);
+      });
 
   force.on("tick", function() {
     link.attr("x1", function(d) { return w/2 + d.source.x; })

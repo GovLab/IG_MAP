@@ -1,0 +1,1041 @@
+%!PS-Adobe-3.0
+%%BoundingBox: 24 24 571 818
+%%Title: Enscript Output
+%%For: luisdaniel
+%%Creator: GNU Enscript 1.6.6
+%%CreationDate: Thu Oct  9 16:57:38 2014
+%%Orientation: Landscape
+%%Pages: (atend)
+%%DocumentMedia: A4 595 842 0 () ()
+%%DocumentNeededResources: (atend)
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset Enscript-Prolog 1.6 6
+%
+% Procedures.
+%
+
+/_S {	% save current state
+  /_s save def
+} def
+/_R {	% restore from saved state
+  _s restore
+} def
+
+/S {	% showpage protecting gstate
+  gsave
+  showpage
+  grestore
+} bind def
+
+/MF {	% fontname newfontname -> -	make a new encoded font
+  /newfontname exch def
+  /fontname exch def
+
+  /fontdict fontname findfont def
+  /newfont fontdict maxlength dict def
+
+  fontdict {
+    exch
+    dup /FID eq {
+      % skip FID pair
+      pop pop
+    } {
+      % copy to the new font dictionary
+      exch newfont 3 1 roll put
+    } ifelse
+  } forall
+
+  newfont /FontName newfontname put
+
+  % insert only valid encoding vectors
+  encoding_vector length 256 eq {
+    newfont /Encoding encoding_vector put
+  } if
+
+  newfontname newfont definefont pop
+} def
+
+/MF_PS { % fontname newfontname -> -	make a new font preserving its enc
+  /newfontname exch def
+  /fontname exch def
+
+  /fontdict fontname findfont def
+  /newfont fontdict maxlength dict def
+
+  fontdict {
+    exch
+    dup /FID eq {
+      % skip FID pair
+      pop pop
+    } {
+      % copy to the new font dictionary
+      exch newfont 3 1 roll put
+    } ifelse
+  } forall
+
+  newfont /FontName newfontname put
+
+  newfontname newfont definefont pop
+} def
+
+/SF { % fontname width height -> -	set a new font
+  /height exch def
+  /width exch def
+
+  findfont
+  [width 0 0 height 0 0] makefont setfont
+} def
+
+/SUF { % fontname width height -> -	set a new user font
+  /height exch def
+  /width exch def
+
+  /F-gs-user-font MF
+  /F-gs-user-font width height SF
+} def
+
+/SUF_PS { % fontname width height -> -	set a new user font preserving its enc
+  /height exch def
+  /width exch def
+
+  /F-gs-user-font MF_PS
+  /F-gs-user-font width height SF
+} def
+
+/M {moveto} bind def
+/s {show} bind def
+
+/Box {	% x y w h -> -			define box path
+  /d_h exch def /d_w exch def /d_y exch def /d_x exch def
+  d_x d_y  moveto
+  d_w 0 rlineto
+  0 d_h rlineto
+  d_w neg 0 rlineto
+  closepath
+} def
+
+/bgs {	% x y height blskip gray str -> -	show string with bg color
+  /str exch def
+  /gray exch def
+  /blskip exch def
+  /height exch def
+  /y exch def
+  /x exch def
+
+  gsave
+    x y blskip sub str stringwidth pop height Box
+    gray setgray
+    fill
+  grestore
+  x y M str s
+} def
+
+/bgcs { % x y height blskip red green blue str -> -  show string with bg color
+  /str exch def
+  /blue exch def
+  /green exch def
+  /red exch def
+  /blskip exch def
+  /height exch def
+  /y exch def
+  /x exch def
+
+  gsave
+    x y blskip sub str stringwidth pop height Box
+    red green blue setrgbcolor
+    fill
+  grestore
+  x y M str s
+} def
+
+% Highlight bars.
+/highlight_bars {	% nlines lineheight output_y_margin gray -> -
+  gsave
+    setgray
+    /ymarg exch def
+    /lineheight exch def
+    /nlines exch def
+
+    % This 2 is just a magic number to sync highlight lines to text.
+    0 d_header_y ymarg sub 2 sub translate
+
+    /cw d_output_w cols div def
+    /nrows d_output_h ymarg 2 mul sub lineheight div cvi def
+
+    % for each column
+    0 1 cols 1 sub {
+      cw mul /xp exch def
+
+      % for each rows
+      0 1 nrows 1 sub {
+        /rn exch def
+        rn lineheight mul neg /yp exch def
+        rn nlines idiv 2 mod 0 eq {
+	  % Draw highlight bar.  4 is just a magic indentation.
+	  xp 4 add yp cw 8 sub lineheight neg Box fill
+	} if
+      } for
+    } for
+
+  grestore
+} def
+
+% Line highlight bar.
+/line_highlight {	% x y width height gray -> -
+  gsave
+    /gray exch def
+    Box gray setgray fill
+  grestore
+} def
+
+% Column separator lines.
+/column_lines {
+  gsave
+    .1 setlinewidth
+    0 d_footer_h translate
+    /cw d_output_w cols div def
+    1 1 cols 1 sub {
+      cw mul 0 moveto
+      0 d_output_h rlineto stroke
+    } for
+  grestore
+} def
+
+% Column borders.
+/column_borders {
+  gsave
+    .1 setlinewidth
+    0 d_footer_h moveto
+    0 d_output_h rlineto
+    d_output_w 0 rlineto
+    0 d_output_h neg rlineto
+    closepath stroke
+  grestore
+} def
+
+% Do the actual underlay drawing
+/draw_underlay {
+  ul_style 0 eq {
+    ul_str true charpath stroke
+  } {
+    ul_str show
+  } ifelse
+} def
+
+% Underlay
+/underlay {	% - -> -
+  gsave
+    0 d_page_h translate
+    d_page_h neg d_page_w atan rotate
+
+    ul_gray setgray
+    ul_font setfont
+    /dw d_page_h dup mul d_page_w dup mul add sqrt def
+    ul_str stringwidth pop dw exch sub 2 div ul_h_ptsize -2 div moveto
+    draw_underlay
+  grestore
+} def
+
+/user_underlay {	% - -> -
+  gsave
+    ul_x ul_y translate
+    ul_angle rotate
+    ul_gray setgray
+    ul_font setfont
+    0 0 ul_h_ptsize 2 div sub moveto
+    draw_underlay
+  grestore
+} def
+
+% Page prefeed
+/page_prefeed {		% bool -> -
+  statusdict /prefeed known {
+    statusdict exch /prefeed exch put
+  } {
+    pop
+  } ifelse
+} def
+
+% Wrapped line markers
+/wrapped_line_mark {	% x y charwith charheight type -> -
+  /type exch def
+  /h exch def
+  /w exch def
+  /y exch def
+  /x exch def
+
+  type 2 eq {
+    % Black boxes (like TeX does)
+    gsave
+      0 setlinewidth
+      x w 4 div add y M
+      0 h rlineto w 2 div 0 rlineto 0 h neg rlineto
+      closepath fill
+    grestore
+  } {
+    type 3 eq {
+      % Small arrows
+      gsave
+        .2 setlinewidth
+        x w 2 div add y h 2 div add M
+        w 4 div 0 rlineto
+        x w 4 div add y lineto stroke
+
+        x w 4 div add w 8 div add y h 4 div add M
+        x w 4 div add y lineto
+	w 4 div h 8 div rlineto stroke
+      grestore
+    } {
+      % do nothing
+    } ifelse
+  } ifelse
+} def
+
+% EPSF import.
+
+/BeginEPSF {
+  /b4_Inc_state save def    		% Save state for cleanup
+  /dict_count countdictstack def	% Count objects on dict stack
+  /op_count count 1 sub def		% Count objects on operand stack
+  userdict begin
+  /showpage { } def
+  0 setgray 0 setlinecap
+  1 setlinewidth 0 setlinejoin
+  10 setmiterlimit [ ] 0 setdash newpath
+  /languagelevel where {
+    pop languagelevel
+    1 ne {
+      false setstrokeadjust false setoverprint
+    } if
+  } if
+} bind def
+
+/EndEPSF {
+  count op_count sub { pos } repeat	% Clean up stacks
+  countdictstack dict_count sub { end } repeat
+  b4_Inc_state restore
+} bind def
+
+% Check PostScript language level.
+/languagelevel where {
+  pop /gs_languagelevel languagelevel def
+} {
+  /gs_languagelevel 1 def
+} ifelse
+%%EndResource
+%%BeginResource: procset Enscript-Encoding-88591 1.6 6
+/encoding_vector [
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/space        	/exclam       	/quotedbl     	/numbersign   	
+/dollar       	/percent      	/ampersand    	/quoteright   	
+/parenleft    	/parenright   	/asterisk     	/plus         	
+/comma        	/hyphen       	/period       	/slash        	
+/zero         	/one          	/two          	/three        	
+/four         	/five         	/six          	/seven        	
+/eight        	/nine         	/colon        	/semicolon    	
+/less         	/equal        	/greater      	/question     	
+/at           	/A            	/B            	/C            	
+/D            	/E            	/F            	/G            	
+/H            	/I            	/J            	/K            	
+/L            	/M            	/N            	/O            	
+/P            	/Q            	/R            	/S            	
+/T            	/U            	/V            	/W            	
+/X            	/Y            	/Z            	/bracketleft  	
+/backslash    	/bracketright 	/asciicircum  	/underscore   	
+/quoteleft    	/a            	/b            	/c            	
+/d            	/e            	/f            	/g            	
+/h            	/i            	/j            	/k            	
+/l            	/m            	/n            	/o            	
+/p            	/q            	/r            	/s            	
+/t            	/u            	/v            	/w            	
+/x            	/y            	/z            	/braceleft    	
+/bar          	/braceright   	/tilde        	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/space        	/exclamdown   	/cent         	/sterling     	
+/currency     	/yen          	/brokenbar    	/section      	
+/dieresis     	/copyright    	/ordfeminine  	/guillemotleft	
+/logicalnot   	/hyphen       	/registered   	/macron       	
+/degree       	/plusminus    	/twosuperior  	/threesuperior	
+/acute        	/mu           	/paragraph    	/bullet       	
+/cedilla      	/onesuperior  	/ordmasculine 	/guillemotright	
+/onequarter   	/onehalf      	/threequarters	/questiondown 	
+/Agrave       	/Aacute       	/Acircumflex  	/Atilde       	
+/Adieresis    	/Aring        	/AE           	/Ccedilla     	
+/Egrave       	/Eacute       	/Ecircumflex  	/Edieresis    	
+/Igrave       	/Iacute       	/Icircumflex  	/Idieresis    	
+/Eth          	/Ntilde       	/Ograve       	/Oacute       	
+/Ocircumflex  	/Otilde       	/Odieresis    	/multiply     	
+/Oslash       	/Ugrave       	/Uacute       	/Ucircumflex  	
+/Udieresis    	/Yacute       	/Thorn        	/germandbls   	
+/agrave       	/aacute       	/acircumflex  	/atilde       	
+/adieresis    	/aring        	/ae           	/ccedilla     	
+/egrave       	/eacute       	/ecircumflex  	/edieresis    	
+/igrave       	/iacute       	/icircumflex  	/idieresis    	
+/eth          	/ntilde       	/ograve       	/oacute       	
+/ocircumflex  	/otilde       	/odieresis    	/divide       	
+/oslash       	/ugrave       	/uacute       	/ucircumflex  	
+/udieresis    	/yacute       	/thorn        	/ydieresis    	
+] def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Courier-Bold
+%%IncludeResource: font Courier
+/HFpt_w 10 def
+/HFpt_h 10 def
+/Courier-Bold /HF-gs-font MF
+/HF /HF-gs-font findfont [HFpt_w 0 0 HFpt_h 0 0] makefont def
+/Courier /F-gs-font MF
+/F-gs-font 7 7 SF
+/#copies 1 def
+% Pagedevice definitions:
+gs_languagelevel 1 gt {
+  <<
+    /PageSize [595 842] 
+  >> setpagedevice
+} if
+%%BeginResource: procset Enscript-Header-simple 1.6 6
+
+/do_header {	% print default simple header
+  gsave
+    d_header_x d_header_y HFpt_h 3 div add translate
+
+    HF setfont
+    user_header_p {
+      5 0 moveto user_header_left_str show
+
+      d_header_w user_header_center_str stringwidth pop sub 2 div
+      0 moveto user_header_center_str show
+
+      d_header_w user_header_right_str stringwidth pop sub 5 sub
+      0 moveto user_header_right_str show
+    } {
+      5 0 moveto fname show
+      45 0 rmoveto fmodstr show
+      45 0 rmoveto pagenumstr show
+    } ifelse
+
+  grestore
+} def
+%%EndResource
+/d_page_w 794 def
+/d_page_h 547 def
+/d_header_x 0 def
+/d_header_y 532 def
+/d_header_w 794 def
+/d_header_h 15 def
+/d_footer_x 0 def
+/d_footer_y 0 def
+/d_footer_w 794 def
+/d_footer_h 0 def
+/d_output_w 794 def
+/d_output_h 532 def
+/cols 2 def
+%%EndSetup
+%%Page: (1) 1
+%%BeginPageSetup
+_S
+90 rotate
+24 -571 translate
+/pagenum 1 def
+/fname (main.py) def
+/fdir (.) def
+/ftail (main.py) def
+% User defined strings:
+/fmodstr (Thu Oct 09 16:55:50 2014) def
+/pagenumstr (1) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 522 M
+(#    Sample main.py Tornado file) s
+5 514 M
+(#    \(for Tornado on Heroku\)) s
+5 506 M
+(#) s
+5 498 M
+(#    Author: Mike Dory | dory.me) s
+5 490 M
+(#    Created: 11.12.11 | Updated: 06.02.13) s
+5 482 M
+(#    Contributions by Tedb0t, gregory80) s
+5 474 M
+(#) s
+5 466 M
+(# ------------------------------------------) s
+5 450 M
+(#!/usr/bin/env python) s
+5 442 M
+(import os.path) s
+5 434 M
+(import tornado.escape) s
+5 426 M
+(import tornado.httpserver) s
+5 418 M
+(import tornado.ioloop) s
+5 410 M
+(import tornado.options) s
+5 402 M
+(import tornado.web) s
+5 394 M
+(import logging) s
+5 386 M
+(import csv) s
+5 378 M
+(import re) s
+5 362 M
+(from py2neo import neo4j) s
+5 354 M
+(from py2neo import node, rel, cypher) s
+5 346 M
+(from py2neo.packages.urimagic import URI) s
+5 330 M
+(# import and define tornado-y things) s
+5 322 M
+(from tornado.options import define) s
+5 314 M
+(define\("port", default=5000, help="run on the given port", type=int\)) s
+5 298 M
+(#DB) s
+5 290 M
+(# graphenedb_url = os.environ.get\("GRAPHENEDB_URL", "http://localhost:7474/"\)) s
+5 282 M
+(# service_root = neo4j.ServiceRoot\(URI\(graphenedb_url\).resolve\("/"\)\)) s
+5 274 M
+(# graph_db = service_root.graph_db) s
+5 266 M
+(graph_db = neo4j.GraphDatabaseService\(\)) s
+5 258 M
+(session = cypher.Session\(\)) s
+5 242 M
+(issue_list = [{) s
+5 234 M
+(            "issue":"DNS Security",) s
+5 226 M
+(            "synonyms":["dns","dns security", "dnssec"]) s
+5 218 M
+(        }, ) s
+5 210 M
+(        {) s
+5 202 M
+(            "issue":"IPv6 Adoption", ) s
+5 194 M
+(            "synonyms":["ipv6","ipv6 adoption", "ip"]) s
+5 186 M
+(        }, {) s
+5 178 M
+(            "issue":"Broadband Promotion", ) s
+5 170 M
+(            "synonyms":["broadband","broadband promotion"]) s
+5 162 M
+(        }, {) s
+5 154 M
+(            "issue":"Child Pornography", ) s
+5 146 M
+(            "synonyms":["cp","child pornography", "child porn"]) s
+5 138 M
+(        }, {) s
+5 130 M
+(            "issue":"Internet Gambling",) s
+5 122 M
+(            "synonyms":["internet gambling","gambling"]) s
+5 114 M
+(        }]) s
+5 106 M
+(relationships = ["address", "addresses" "deals", "deal", "attends", "attend" "focuses", "foc) s
+5 98 M
+(us" "undertakes", "tackles", "tackle", "concerning" "sees", "about", "on"]) s
+5 90 M
+(type_list = [{) s
+5 82 M
+(            "synonyms": ["initiatives", "events", "conferences", "parties", "proposal", "pla) s
+5 74 M
+(ns", "schemes", "strategies"],) s
+5 66 M
+(            "type":"Initiatives & Events") s
+5 58 M
+(        },) s
+5 50 M
+(        {) s
+5 42 M
+(            "synonyms": ["laws", "policies", "rules", "bylaws", "bills", "decrees", "resolut) s
+5 34 M
+(ions", "orders", "procedures"],) s
+5 26 M
+(            "type":"Laws & Policies") s
+5 18 M
+(        },) s
+5 10 M
+(        {) s
+5 2 M
+(            "synonyms": ["organizations", "groups", "firm", "corporation", "association", "s) s
+402 522 M
+(ociety", "institutions", "people", "leaders", "individuals", "humans"],) s
+402 514 M
+(            "type":"Actor") s
+402 506 M
+(        }, ) s
+402 498 M
+(        {) s
+402 490 M
+(            "synonyms": ["research", "investigations", "studies", "study", "findings", "expe) s
+402 482 M
+(riments", "analysis", "support", "backing"],) s
+402 474 M
+(            "type":"Research & Advocacy") s
+402 466 M
+(        },) s
+402 458 M
+(        {) s
+402 450 M
+(            "synonyms": ["standards", "protocols", "norms", "guidelines", "criteria", "norms) s
+402 442 M
+("],) s
+402 434 M
+(            "type":"Standards") s
+402 426 M
+(        },) s
+402 418 M
+(        {) s
+402 410 M
+(            "synonyms": ["tools", "information", "applications", "apps", "instruments", "mat) s
+402 402 M
+(erials"],) s
+402 394 M
+(            "type":"Tools & Resources") s
+402 386 M
+(        }) s
+402 378 M
+(        ]) s
+402 362 M
+(# application settings and handle mapping info) s
+402 354 M
+(class Application\(tornado.web.Application\):) s
+402 346 M
+(    def __init__\(self\):) s
+402 338 M
+(        self.query_builder = QueryBuilder\(\)) s
+402 330 M
+(        handlers = [) s
+402 322 M
+(            \(r"/?", MainHandler\),) s
+402 314 M
+(            \(r"/load/?", LoadHandler\)) s
+402 306 M
+(        ]) s
+402 298 M
+(        settings = dict\() s
+402 290 M
+(            template_path=os.path.join\(os.path.dirname\(__file__\), "templates"\),) s
+402 282 M
+(            static_path=os.path.join\(os.path.dirname\(__file__\), "static"\),) s
+402 274 M
+(            debug=True,) s
+402 266 M
+(        \)) s
+402 258 M
+(        tornado.web.Application.__init__\(self, handlers, **settings\)) s
+402 234 M
+(# the main page) s
+402 226 M
+(class MainHandler\(tornado.web.RequestHandler\):) s
+402 218 M
+(    def get\(self\):) s
+402 210 M
+(        if 'GOOGLEANALYTICSID' in os.environ:) s
+402 202 M
+(            google_analytics_id = os.environ['GOOGLEANALYTICSID']) s
+402 194 M
+(        else:) s
+402 186 M
+(            google_analytics_id = False) s
+402 178 M
+(        #query = "START r=rel\(*\) RETURN r") s
+402 170 M
+(        query = "MATCH \(n\)-[r:ADDRESSES]->\(m\) WHERE n.type=\\"Actor\\" AND m.name=\\"Broadband ) s
+402 162 M
+(Promotion\\" RETURN DISTINCT r, n") s
+402 154 M
+(        tx = session.create_transaction\(\)) s
+402 146 M
+(        tx.append\(query\)) s
+402 138 M
+(        results = tx.execute\(\)) s
+402 130 M
+(        nodes = []) s
+402 122 M
+(        links = []) s
+402 114 M
+(        track_nodes = []) s
+402 106 M
+(        for r in results[0]:) s
+402 98 M
+(            if r.values[0].start_node['name'].encode\('utf-8'\) not in track_nodes:) s
+402 90 M
+(                n = {}) s
+402 82 M
+(                n['name'] = r.values[0].start_node['name'].encode\('utf-8'\)) s
+402 74 M
+(                n['group'] = r.values[0].start_node['type'].encode\('utf-8'\)) s
+402 66 M
+(                n['description'] = "sdfsdfsdf" #r.values[0].start_node['description'].encode) s
+402 58 M
+(\('utf-8'\) if 'description' in r.values[0].start_node else '') s
+402 50 M
+(                n['node'] = r.values[0].start_node['node_id']) s
+402 42 M
+(                track_nodes.append\(n['name']\)) s
+402 34 M
+(                nodes.append\(n\)) s
+402 26 M
+(            if r.values[0].end_node['name'].encode\('utf-8'\) not in track_nodes:) s
+402 18 M
+(                n = {}) s
+402 10 M
+(                n['name'] = r.values[0].end_node['name'].encode\('utf-8'\)) s
+402 2 M
+(                n['group'] = r.values[0].end_node['type'].encode\('utf-8'\)) s
+_R
+S
+%%Page: (2) 2
+%%BeginPageSetup
+_S
+90 rotate
+24 -571 translate
+/pagenum 2 def
+/fname (main.py) def
+/fdir (.) def
+/ftail (main.py) def
+% User defined strings:
+/fmodstr (Thu Oct 09 16:55:50 2014) def
+/pagenumstr (2) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 522 M
+(                n['description'] = "dsfgdfgdfg" #r.values[0].end_node['description'].encode\() s
+5 514 M
+('utf-8'\) if 'description' in r.values[0].end_node else '') s
+5 506 M
+(                n['node'] = r.values[0].end_node['node_id']) s
+5 498 M
+(                track_nodes.append\(n['name']\)) s
+5 490 M
+(                nodes.append\(n\)) s
+5 482 M
+(            links.append\({"source":r.values[0].start_node['node_id'], "target":r.values[0].e) s
+5 474 M
+(nd_node['node_id']}\)) s
+5 466 M
+(        # nodes = []) s
+5 458 M
+(        # links = []) s
+5 450 M
+(        # for r in results[0]:) s
+5 442 M
+(        #     nodes.append\({) s
+5 434 M
+(        #         "name":r.values[0].start_node['name'].encode\('utf-8'\), ) s
+5 426 M
+(        #         "group":r.values[0].start_node['type'].encode\('utf-8'\), ) s
+5 418 M
+(        #         "description":r.values[0].start_node['description'].encode\('utf-8'\), ) s
+5 410 M
+(        #         "node":r.values[0].start_node['node_id']}\)) s
+5 402 M
+(        #     nodes.append\({) s
+5 394 M
+(        #         "name":r.values[0].end_node['name'].encode\('utf-8'\), ) s
+5 386 M
+(        #         "group":r.values[0].end_node['type'].encode\('utf-8'\), ) s
+5 378 M
+(        #         "description":r.values[0].start_node['description'].encode\('utf-8'\), ) s
+5 370 M
+(        #         "node":r.values[0].end_node['node_id']}\) ) s
+5 362 M
+(        #     nodes = [dict\(t\) for t in set\([tuple\(d.items\(\)\) for d in nodes]\)]) s
+5 354 M
+(        #     links.append\({"source":r.values[0].start_node['node_id'], "target":r.values[0]) s
+5 346 M
+(.end_node['node_id']}\)) s
+5 338 M
+(        self.render\() s
+5 330 M
+(            "index.html",) s
+5 322 M
+(            page_title='Internet Governance Map',) s
+5 314 M
+(            page_heading='Map of Internet Governance',) s
+5 306 M
+(            nodes=nodes,) s
+5 298 M
+(            links =links,) s
+5 290 M
+(            google_analytics_id=google_analytics_id,) s
+5 282 M
+(        \)) s
+5 274 M
+(    def post\(self\):) s
+5 266 M
+(        query = self.get_argument\("query", None\)) s
+5 258 M
+(        query = self.application.query_builder.build\(query\)) s
+5 250 M
+(        tx = session.create_transaction\(\)) s
+5 242 M
+(        tx.append\(query\)) s
+5 234 M
+(        results = tx.execute\(\)) s
+5 226 M
+(        nodes = []) s
+5 218 M
+(        links = []) s
+5 210 M
+(        for r in results[0]:) s
+5 202 M
+(            nodes.append\({"name":r.values[0].start_node['name'].encode\('utf-8'\), "group":r.v) s
+5 194 M
+(alues[0].start_node['type'].encode\('utf-8'\), "node":r.values[0].start_node['node_id']}\) ) s
+5 186 M
+(            nodes.append\({"name":r.values[0].end_node['name'].encode\('utf-8'\), "group":r.val) s
+5 178 M
+(ues[0].end_node['type'].encode\('utf-8'\), "node":r.values[0].end_node['node_id']}\) ) s
+5 170 M
+(            nodes = [dict\(t\) for t in set\([tuple\(d.items\(\)\) for d in nodes]\)]) s
+5 162 M
+(            links.append\({"source":r.values[0].start_node['node_id'], "target":r.values[0].e) s
+5 154 M
+(nd_node['node_id']}\)) s
+5 146 M
+(        self.write\({"nodes":nodes, "links":links, "query":query}\)) s
+5 130 M
+(class QueryBuilder\(object\):) s
+5 122 M
+(    def build\(self, query\):) s
+5 114 M
+(        q = query.split\(\)) s
+5 106 M
+(        rel = [s for s in relationships if s in q]) s
+5 98 M
+(        rel_word = q.index\(rel[0]\)) s
+5 90 M
+(        cat = '') s
+5 82 M
+(        issue = '') s
+5 74 M
+(        for typ in type_list:) s
+5 66 M
+(            for word in q[0:q.index\(rel[0]\)]:) s
+5 58 M
+(                if any\(word in s for s in typ['synonyms']\):) s
+5 50 M
+(                    cat = typ['type']) s
+5 42 M
+(        for iss in issue_list:) s
+5 34 M
+(            for word in q[rel_word+1:]:) s
+5 26 M
+(                if any\(word in s for s in iss['synonyms']\):) s
+5 18 M
+(                    issue = iss['issue']) s
+5 10 M
+(        logging.info\(rel\)) s
+5 2 M
+(        logging.info\(issue\)) s
+402 522 M
+(        logging.info\(cat\)) s
+402 514 M
+(        return "MATCH \(n\)-[r:ADDRESSES]->\(m\) WHERE n.type=\\""+ cat +"\\" AND m.name=\\""+ issu) s
+402 506 M
+(e +"\\" RETURN DISTINCT r, n") s
+402 482 M
+(class LoadHandler\(tornado.web.RequestHandler\):) s
+402 474 M
+(    def get\(self\):) s
+402 466 M
+(        index = 0) s
+402 458 M
+(        types= []) s
+402 450 M
+(        #GET NODES) s
+402 442 M
+(        try:) s
+402 434 M
+(            nodes = \(\)) s
+402 426 M
+(            with open\("static/files/nodes.csv", mode='r'\) as infile:) s
+402 418 M
+(                reader = csv.reader\(infile\)) s
+402 410 M
+(                for row in reader:) s
+402 402 M
+(                    if row[0] != 'name':) s
+402 394 M
+(                        nodes = nodes + \({'name':row[0], 'abbrev':row[3], 'type':row[1], "de) s
+402 386 M
+(scription":row[2], "node_id":index },\)) s
+402 378 M
+(                        types.append\(row[1]\)) s
+402 370 M
+(                        index = index + 1) s
+402 362 M
+(            types = list\(set\(types\)\)) s
+402 354 M
+(        except Exception, e:) s
+402 346 M
+(            print "Could not convert to dictionary: " + str\(e\)) s
+402 338 M
+(        #GET LIST OF ISSUES) s
+402 330 M
+(        try: ) s
+402 322 M
+(            issues = \(\)) s
+402 314 M
+(            with open\("static/files/issues.csv", mode='r'\) as infile:) s
+402 306 M
+(                reader = csv.reader\(infile\)) s
+402 298 M
+(                for row in reader:) s
+402 290 M
+(                    if row[0] != 'name':) s
+402 282 M
+(                        issues = issues + \({'name':row[0], "type":row[1], "node_id":index},\)) s
+402 274 M
+(                        index = index + 1) s
+402 266 M
+(        except Exception, e:) s
+402 258 M
+(            print "Could not get issues: " + str\(e\)) s
+402 250 M
+(        #GET RELATIONSHIPS) s
+402 242 M
+(        try:) s
+402 234 M
+(            relationships = \(\)) s
+402 226 M
+(            with open\("static/files/relationships.csv", mode='r'\) as infile:) s
+402 218 M
+(                reader = csv.reader\(infile\)) s
+402 210 M
+(                for row in reader:) s
+402 202 M
+(                    if row[0]!='name1':) s
+402 194 M
+(                        relationships = relationships + \({'node1':row[0], 'relationship':row) s
+402 186 M
+([1], 'node2':row[2]}, \)) s
+402 178 M
+(        except Exception, e:) s
+402 170 M
+(            print "Could not get relationships: " + str\(e\)) s
+402 162 M
+(        #clear DB) s
+402 154 M
+(        graph_db.clear\(\)) s
+402 138 M
+(        #MAKE A LIST OF INDECES) s
+402 130 M
+(        indeces = {}) s
+402 122 M
+(        indeces['Issue'] = graph_db.get_or_create_index\(neo4j.Node, 'Issue'\)) s
+402 114 M
+(        for type_ in types:) s
+402 106 M
+(            indeces[type_] = graph_db.get_or_create_index\(neo4j.Node, type_\)) s
+402 90 M
+(        batch = neo4j.WriteBatch\(graph_db\)) s
+402 74 M
+(        #CREATE ISSUE NODES) s
+402 66 M
+(        for i in issues:) s
+402 58 M
+(            n = batch.create\(node\(node_id=i['node_id'], name=i['name'], type="Issue"\)\)) s
+402 50 M
+(            batch.add_labels\(n, 'Issue'\)) s
+402 42 M
+(            batch.add_indexed_node\(indeces['Issue'], 'node_id', index, n\)) s
+402 26 M
+(        #CREATE NODES) s
+402 18 M
+(        for nod in nodes:) s
+402 10 M
+(            n = batch.create\(node\(node_id=nod['node_id'], name=nod['name'].replace\('"', ""\),) s
+402 2 M
+( abbrev=nod['abbrev'], description=nod['description'], type=nod['type']\)\)) s
+_R
+S
+%%Page: (3) 3
+%%BeginPageSetup
+_S
+90 rotate
+24 -571 translate
+/pagenum 3 def
+/fname (main.py) def
+/fdir (.) def
+/ftail (main.py) def
+% User defined strings:
+/fmodstr (Thu Oct 09 16:55:50 2014) def
+/pagenumstr (3) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+5 522 M
+(            batch.add_labels\(n, nod['type']\)) s
+5 514 M
+(            batch.add_indexed_node\(indeces[nod['type']],'node_id', nod['node_id'], n\)) s
+5 498 M
+(        nodes = batch.submit\(\)) s
+5 482 M
+(        #NEED TO CREATE QUERY TO ADD LINKS TO ISSUES) s
+5 474 M
+(        for r in relationships:) s
+5 466 M
+(            query = "START n=node\(*\), m=node\(*\) ") s
+5 458 M
+(            query += "WHERE n.name=\\"{0}\\" AND m.name=\\"{1}\\" ".format\(r['node1'].replace\('") s
+5 450 M
+(', ""\), r['node2'].replace\('"', ""\)\)) s
+5 442 M
+(            query += "CREATE \(n\)-[:{0}]->\(m\)" .format\(r['relationship']\)) s
+5 434 M
+(            neo4j.CypherQuery\(graph_db, query\).execute\(\)) s
+5 418 M
+(def main\(\):) s
+5 410 M
+(    tornado.options.parse_command_line\(\)) s
+5 402 M
+(    http_server = tornado.httpserver.HTTPServer\(Application\(\)\)) s
+5 394 M
+(    http_server.listen\(tornado.options.options.port\)) s
+5 378 M
+(    # start it up) s
+5 370 M
+(    tornado.ioloop.IOLoop.instance\(\).start\(\)) s
+5 346 M
+(if __name__ == "__main__":) s
+5 338 M
+(    main\(\)) s
+_R
+S
+%%Trailer
+%%Pages: 3
+%%DocumentNeededResources: font Courier-Bold Courier 
+%%EOF
