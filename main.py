@@ -100,8 +100,8 @@ class MainHandler(tornado.web.RequestHandler):
             google_analytics_id = os.environ['GOOGLEANALYTICSID']
         else:
             google_analytics_id = False
-        query = "START r=rel(*) RETURN r"
-        #query = "MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type=\"Actor\" AND m.name=\"Broadband Promotion\" RETURN DISTINCT r, n"
+        #query = "START r=rel(*) RETURN r"
+        query = "MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type=\"Actor\" AND m.name=\"Broadband Promotion\" RETURN DISTINCT r, n"
         tx = session.create_transaction()
         tx.append(query)
         results = tx.execute()
@@ -167,7 +167,7 @@ class LoadHandler(tornado.web.RequestHandler):
                 reader = csv.reader(infile)
                 for row in reader:
                     if row[0] != 'name':
-                        nodes = nodes + ({'name':row[0], 'abbrev':row[3], 'type':row[1], "description":row[2] "node_id":index },)
+                        nodes = nodes + ({'name':row[0], 'abbrev':row[3], 'type':row[1], "description":row[2], "node_id":index },)
                         types.append(row[1])
                         index = index + 1
             types = list(set(types))
