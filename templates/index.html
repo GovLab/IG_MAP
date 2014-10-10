@@ -139,6 +139,9 @@ $('#container').on("click", "#submit", function() {
 	});
 })
 
+
+
+
 var w = $('.graph').width();
 var h = 600;
 
@@ -158,9 +161,13 @@ var force = d3.layout.force()
     .linkDistance(200)
     .size([w, h]);
 
-var svg = d3.select(".graph").append("svg")
+var svg = d3.select(".graph").append("svg:svg")
     .attr("width", w)
-    .attr("height", h);
+    .attr("height", h)
+    .append('svg:g')
+    .attr("pointer-events", "all")
+    .call(d3.behavior.zoom().on("zoom", redraw))
+    .append('svg:g');
 
 function updateWindow(){
     x = w.innerWidth || e.clientWidth || g.clientWidth;
@@ -170,6 +177,12 @@ function updateWindow(){
 }
 window.onresize = updateWindow;
 
+function redraw() {
+  console.log("here", d3.event.translate, d3.event.scale);
+  svg.attr("transform",
+      "translate(" + d3.event.translate + ")"
+      + " scale(" + d3.event.scale + ")");
+}
 
 force = d3.layout.force()
       .nodes(graph.nodes)
