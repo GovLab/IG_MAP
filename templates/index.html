@@ -193,10 +193,7 @@ force = d3.layout.force()
   var nodeTitles = node.append("title")
       .text(function(d) { return d.name; });
 
-    node.on("mouseover", function(d) {
-      	$('.node_name').text(d.name);
-      	$('.node_description').text(d.description);
-      });
+    
 
   force.on("tick", function() {
     link.attr("x1", function(d) { return w/2 + d.source.x; })
@@ -207,6 +204,15 @@ force = d3.layout.force()
     node.attr("cx", function(d) { return w/2 + d.x; })
         .attr("cy", function(d) { return h/2 + d.y; });
   });
+
+var mouseover = function() {
+	node.on("mouseover", function(d) {
+      	$('.node_name').text(d.name);
+      	$('.node_description').text(d.description);
+      });
+}
+
+	node.on("mouseover", mouseover);
 
 var updateGraph = function(graph_) {
 
@@ -244,6 +250,7 @@ var updateGraph = function(graph_) {
 	node.select("title")
 		.text(function(d) { return d.name; });
 	
+	node.on("mouseover", mouseover);
 
 	force.on("tick", function() {
 		link.attr("x1", function(d) { return w/2 + d.source.x; })
@@ -254,8 +261,6 @@ var updateGraph = function(graph_) {
 	    node.attr("cx", function(d) { return w/2 + d.x; })
 	        .attr("cy", function(d) { return h/2 + d.y; });
 	  });
-
-
 }
 
 </script>
