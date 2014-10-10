@@ -54,7 +54,7 @@ issue_list = [{
             "issue":"Internet Gambling",
             "synonyms":["internet gambling","gambling"]
         }]
-relationships = ["address", "addresses" "deals", "deal", "attends", "attend" "focuses", "focus" "undertakes", "tackles", "tackle", "concerning" "sees", "about", "on"]
+relationships = ["address", "addresses" "deals", "deal", "attends", "attend" "focuses", "focus" "undertakes", "research", "tackles", "tackle", "concerning" "sees", "about", "on"]
 type_list = [{
             "synonyms": ["initiatives", "events", "conferences", "parties", "proposal", "plans", "schemes", "strategies"],
             "type":"Initiatives & Events"
@@ -170,11 +170,11 @@ class QueryBuilder(object):
         issue = ''
         for typ in type_list:
             for word in q[0:q.index(rel[0])]:
-                if any(word in s for s in typ['synonyms']):
+                if any(word.lower() in s for s in typ['synonyms']):
                     cat = typ['type']
         for iss in issue_list:
             for word in q[rel_word+1:]:
-                if any(word in s for s in iss['synonyms']):
+                if any(word.lower() in s for s in iss['synonyms']):
                     issue = iss['issue']
         logging.info(rel)
         logging.info(issue)
