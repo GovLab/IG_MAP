@@ -87,8 +87,11 @@ svg {
 	right: auto;
 	height: auto;
 	line-height: 1.3333em;
-	vertical-align: top;
 	color: white;
+}
+
+.error_message {
+	margin-left: 10px;
 }
 
 </style>
@@ -96,7 +99,7 @@ svg {
 <div class="header">
 	<h1> {{page_heading}} </h1>
 	<div class="query">
-			<input type="text" id="query_input" name="query" placeholder="What sort of relationships do you want to look up?" onkeydown="if (event.keyCode == 13) $('#submit').click()" autofocus><button type="button" id="submit" value="Submit">Search</button></p>
+			<input type="text" id="query_input" name="query" placeholder="What sort of relationships do you want to look up?" onkeydown="if (event.keyCode == 13) $('#submit').click()" autofocus><button type="button" id="submit" value="Submit">Search</button><span class="error_message"></span></p>
 	</div>
 </div>
 <div class="graph_area">
@@ -124,6 +127,7 @@ $('#container').on("click", "#submit", function() {
 		data: { "query":query },
 		error: function(error) {
 		    console.debug(JSON.stringify(error));
+		    $(".error_message").text("Something went wrong :(").show().delay(5000).fadeOut();
 		},
 		beforeSend: function(xhr, settings) {
 			console.log(query);

@@ -104,34 +104,11 @@ class MainHandler(tornado.web.RequestHandler):
             google_analytics_id = os.environ['GOOGLEANALYTICSID']
         else:
             google_analytics_id = False
-        #query = "START r=rel(*) RETURN r"
-        query = "MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type=\"Actor\" AND m.name=\"Broadband Promotion\" RETURN DISTINCT r, n"
+        query = "START r=rel(*) RETURN r"
+        #query = "MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type=\"Actor\" AND m.name=\"Broadband Promotion\" RETURN DISTINCT r, n"
         tx = session.create_transaction()
         tx.append(query)
         results = tx.execute()
-        # nodes = []
-        # links = []
-        # track_nodes = []
-        # for r in results[0]:
-        #     if r.values[0].start_node['name'].encode('utf-8') not in track_nodes:
-        #         n = {}
-        #         n['name'] = r.values[0].start_node['name'].encode('utf-8')
-        #         n['group'] = r.values[0].start_node['type'].encode('utf-8')
-        #         n['description'] = r.values[0].start_node['description'].encode('utf-8') if 'description' in r.values[0].start_node else ' '
-        #         n['node'] = r.values[0].start_node['node_id']
-        #         track_nodes.append(n['name'])
-        #         nodes.append(n)
-        #     if r.values[0].end_node['name'].encode('utf-8') not in track_nodes:
-        #         n = {}
-        #         n['name'] = r.values[0].end_node['name'].encode('utf-8')
-        #         n['group'] = r.values[0].end_node['type'].encode('utf-8')
-        #         n['description'] = r.values[0].end_node['description'].encode('utf-8') if 'description' in r.values[0].end_node else ' '
-        #         n['node'] = r.values[0].end_node['node_id']
-        #         track_nodes.append(n['name'])
-        #         nodes.append(n)
-        # for r in results[0]:
-        #     links.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
-        #nodes = [dict(t) for t in set([tuple(d.items()) for d in nodes])]
         nodes = {}
         links = []
         for r in results[0]:
