@@ -164,13 +164,24 @@ class MainHandler(tornado.web.RequestHandler):
         tx = session.create_transaction()
         tx.append(query)
         results = tx.execute()
-        nodes = []
+        nodes = {}
         links = []
         for r in results[0]:
-            nodes.append({"name":r.values[0].start_node['name'].encode('utf-8'), "group":r.values[0].start_node['type'].encode('utf-8'), "node":r.values[0].start_node['node_id']}) 
-            nodes.append({"name":r.values[0].end_node['name'].encode('utf-8'), "group":r.values[0].end_node['type'].encode('utf-8'), "node":r.values[0].end_node['node_id']}) 
-            nodes = [dict(t) for t in set([tuple(d.items()) for d in nodes])]
+            nodes[r.values[0].start_node['node_id']] = {
+                "name":r.values[0].start_node['name'].encode('utf-8'), 
+                "group":r.values[0].start_node['type'].encode('utf-8'), 
+                "description":r.values[0].start_node['description'].encode('utf-8'), 
+                "node":r.values[0].start_node['node_id']}
+            description = r.values[0].end_node['description'].encode('utf-8') if 'description' in r.values[0].end_node else ' '
+            nodes[r.values[0].end_node['node_id']] = {
+                "name":r.values[0].end_node['name'].encode('utf-8'), 
+                "group":r.values[0].end_node['type'].encode('utf-8'), 
+                "description":description, 
+                "node":r.values[0].end_node['node_id']}
+            #nodes2 = [dict(t) for t in set([tuple(d.items()) for d in nodes2])]
+            #nodes2 = list(set(nodes))
             links.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
+        nodes = nodes.values()
         self.write({"nodes":nodes, "links":links, "query":query})
 
 class QueryBuilder(object):
