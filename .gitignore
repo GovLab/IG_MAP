@@ -19,3 +19,4 @@ venv
 #secret stuff
 .env
 .gitignore
+test.ipynb
