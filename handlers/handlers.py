@@ -8,13 +8,15 @@ graph_db = service_root.graph_db
 
 
 class MainHandler(BaseHandler):
-    def get(self):
+    def get(self, display=None):
         if 'GOOGLEANALYTICSID' in os.environ:
             google_analytics_id = os.environ['GOOGLEANALYTICSID']
         else:
             google_analytics_id = False
-        #query_string = "START r=rel(*) RETURN r"
-        query_string = "MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type=\"Actor\" AND m.name=\"Broadband Promotion\" RETURN DISTINCT r, n"
+        if self.get_argument("display", None) == 'all':
+            query_string = "START r=rel(*) RETURN r"
+        else:
+            query_string = "MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type=\"Actor\" AND m.name=\"Broadband Promotion\" RETURN DISTINCT r, n"
         query = neo4j.CypherQuery(graph_db, query_string)
         results = query.execute().data
         start = set([r[0].start_node for r in results])
@@ -31,6 +33,7 @@ class MainHandler(BaseHandler):
         links = []
         for r in results:
             links.append({"source":int(r[0].start_node['node_id']), "target":int(r[0].end_node['node_id'])})
+        logging.info(display)
         self.render(
             "index.html",
             page_title='Internet Governance Map',
