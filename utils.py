@@ -6,6 +6,7 @@ from models import *
 import csv
 import re
 from handlers.handlers import graph_db
+from logging import info
 
 issue_list = [{
             "issue":"DNS Security",
@@ -76,6 +77,82 @@ class QueryBuilder(object):
         return "MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type=\""+ cat +"\" AND m.name=\""+ issue +"\" RETURN DISTINCT r, n"
 
 class DataLoader(object):
+    @classmethod
+    def generate_node_indeces(self, filename):
+        with open(filename, mode="r") as infile:
+            reader = csv.reader(infile)
+            types = []
+            for row in reader:
+                if row[1] != "name":
+                    types.append(row[2])
+                else:
+                    field_names = row
+            types = list(set(types))
+            for type_ in types:
+                graph_db.get_or_create_index(neo4j.Node, type_)
+            return field_names
+
+    def load_nodes_from_file(self, filename):
+        batch = neo4j.WriteBatch(graph_db)
+        num_nodes = 0
+        field_names = self.generate_node_indeces(filename)
+        with open(filename, mode="r") as infile:
+            reader = csv.reader(infile)
+            for row in reader:
+                new = {}
+                if row[1] !="name":
+                    for i in range(0, len(row)):
+                        new[field_names[i]] = row[i].decode('utf-8').strip()
+                    new_node = batch.create(node(new))
+                    index = graph_db.get_index(neo4j.Node, new['type'])
+                    batch.add_indexed_node(index, "name", new['name'].strip(), new_node)
+                    batch.add_labels(new_node, new['type'])
+                    num_nodes +=1
+        info("Loaded: " + str(num_nodes) + " nodes.")
+        batch.submit()
+
+    @classmethod
+    def generate_relationships_indeces_from_file(self, filename):
+        batch = neo4j.WriteBatch(graph_db)
+        with open(filename, mode="r") as infile:
+            reader = csv.reader(infile)
+            relationship_types = []
+            for row in reader:
+                relationship_types.append(row[1])
+            relationship_types = list(set(relationship_types))
+        for r in relationship_types:
+            graph_db.get_or_create_index(neo4j.Relationship, r)
+        return relationship_types
+
+    #because searching for nodes only by name is very slow, you need to get all the indeces from each node.
+    #This will make creating the relationships faster
+    def load_relationships_from_file(self, relationship_filename, node_filename):
+        relationship_types = self.generate_relationships_indeces_from_file(relationship_filename)
+        batch = neo4j.WriteBatch(graph_db)
+        num_relationships = 0
+        error_relationships = []
+        #get indeces from nodes
+        node_dict = {}
+        with open(node_filename, mode="r") as infile:
+            reader = csv.reader(infile)
+            for row in reader:
+                node_dict[row[1]] = row[2]
+        #make relationships
+        with open(relationship_filename, mode="r") as infile:
+            reader = csv.reader(infile)
+            for row in reader:
+                if row[1] != "relationship":
+                    try:
+                        node_1 = graph_db.get_indexed_node(node_dict[row[0]], "name", row[0].decode('utf-8').strip())
+                        node_2 = graph_db.get_indexed_node(node_dict[row[2]], "name", row[2].decode('utf-8').strip())
+                        batch.create(rel(node_1, row[1], node_2))
+                        num_relationships +=1
+                    except Exception, e:
+                        error_relationships.append({"node1":row[0].decode('utf-8').strip(), "rel":row[1], "node2":row[2].decode('utf-8').strip(), "error":str(e)})
+        results = batch.submit()
+        info("The following relationships could not be created:")
+        info(error_relationships)
+
     def create_node(self, label, node_):
         new_node = []
         for key, value in node_.iteritems():
@@ -95,55 +172,53 @@ class DataLoader(object):
         results = neo4j.CypherQuery(graph_db, query_string).execute()
         return results[0][0]
 
-    def get_node_by_index_and_name(index_name, node_name):
+    def get_node_by_index_and_name(self, index_name, node_name):
         index = graph_db.get_index(neo4j.Node, index_name)
         results = index.get("name",node_name)[0]
         return results
 
-    #reads a file and makes a list of all the different types of objects and turns them into indexes.
-    def generate_node_indeces_from_file(self, filename):
-        with open(filename, mode="r") as infile:
-            reader = csv.reader(infile)
-            types = []
-            for row in reader:
-                if row[1] != "name":
-                    types.append(row[2])
-                else:
-                    field_names = row
-            types = list(set(types))
-            for type_ in types:
-                graph_db.get_or_create_index(neo4j.Node, type_)
-            return field_names
+    # #reads a file and makes a list of all the different types of objects and turns them into indexes.
+    # def generate_node_indeces_from_file(self, filename):
+    #     with open(filename, mode="r") as infile:
+    #         reader = csv.reader(infile)
+    #         types = []
+    #         for row in reader:
+    #             if row[1] != "name":
+    #                 types.append(row[2])
+    #             else:
+    #                 field_names = row
+    #         types = list(set(types))
+    #         for type_ in types:
+    #             graph_db.get_or_create_index(neo4j.Node, type_)
+    #         return field_names
 
-    def load_nodes_from_file(self, filename):
-        field_names = generate_node_indeces_from_file("static/files/nodes.csv")
-        batch = neo4j.WriteBatch(graph_db)
-        num_nodes = 0
-        with open(filename, mode="r") as infile:
-            reader = csv.reader(infile)
-            for row in reader:
-                new = {}
-                if row[1] !="name":
-                    for i in range(0, len(row)):
-                        new[field_names[i]] = row[i]
-                    new_node = batch.create(node(new))
-                    index = graph_db.get_index(neo4j.Node, new['type'])
-                    batch.add_indexed_node(index, "name", new['name'], new_node)
-                    batch.add_labels(new_node, new['type'])
-                    num_nodes +=1
-        batch.submit()
+    # def load_nodes_from_file(self, filename):
+    #     field_names = generate_node_indeces_from_file("static/files/nodes.csv")
+    #     batch = neo4j.WriteBatch(graph_db)
+    #     with open(filename, mode="r") as infile:
+    #         reader = csv.reader(infile)
+    #         for row in reader:
+    #             new = {}
+    #             if row[1] !="name":
+    #                 for i in range(0, len(row)):
+    #                     new[field_names[i]] = row[i]
+    #                 new_node = batch.create(node(new))
+    #                 index = graph_db.get_index(neo4j.Node, new['type'])
+    #                 batch.add_indexed_node(index, "name", new['name'], new_node)
+    #                 batch.add_labels(new_node, new['type'])
+    #     batch.submit()
 
-    def generate_relationships_indeces_from_file(self, filename):
-        batch = neo4j.WriteBatch(graph_db)
-        with open(filename, mode="r") as infile:
-            reader = csv.reader(infile)
-            relationship_types = []
-            for row in reader:
-                relationship_types.append(row[1])
-            relationship_types = list(set(relationship_types))
-        for r in relationship_types:
-            graph_db.get_or_create_index(neo4j.Relationship, r)
-        return relationship_types
+    # def generate_relationships_indeces_from_file(self, filename):
+    #     batch = neo4j.WriteBatch(graph_db)
+    #     with open(filename, mode="r") as infile:
+    #         reader = csv.reader(infile)
+    #         relationship_types = []
+    #         for row in reader:
+    #             relationship_types.append(row[1])
+    #         relationship_types = list(set(relationship_types))
+    #     for r in relationship_types:
+    #         graph_db.get_or_create_index(neo4j.Relationship, r)
+    #     return relationship_types
 
 
 

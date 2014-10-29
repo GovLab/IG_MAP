@@ -2,29 +2,29 @@ name1,relationship,name2
 .SE The Internet Infrastructure Foundation,ADDRESSES,DNS Security
 .SE The Internet Infrastructure Foundation,DEVELOPED,DNSCheck
 The Woods Chartiable Foundation,FUNDS,International Centre for Missing & Exploited Children
-Don’t You Forget About Me: A YouTube Channel for Missing Children,ADDRESSES,Child Pornography
+Don't You Forget About Me: A YouTube Channel for Missing Children,ADDRESSES,Child Pornography
 Money for nothing: The case law of the EU Court of Justice on the regulation of gambling,ADDRESSES,Internet Gambling
 Planning for Progress - Why National Broadband Plans Matter,ADDRESSES,Broadband Promotion
 10th European conference on Gambling Studies and Policy Issues,ADDRESSES,Internet Gambling
 29th Meeting of the INTERPOL Specialist Group on Crimes against Children,ADDRESSES,Child Pornography
-29th Meeting of the INTERPOL Specialist Group on Crimes against Children,PRESENTED,"Child abuse material and the Internet: Cyberpsychology of online child related sex offending, Interpol"
+29th Meeting of the INTERPOL Specialist Group on Crimes against Children,PRESENTED,Child abuse material and the Internet: Cyberpsychology of online child related sex offending
 6th International Casino Conference,ADDRESSES,Internet Gambling
 7 Things You Should Know About DNSSEC,ADDRESSES,DNS Security
 A Comparison of Public Policy Approaches to the IPv4-IPv6 Transition,ADDRESSES,IPv6 Adoption
 A Major Milestone for Internet Security,ADDRESSES,DNS Security
 A Typology of Online Child Pornography Offending ,ADDRESSES,Child Pornography
-A. Ivchenko,AUTHORED,Study on online gambling and adequate measures for the protection of consumers of gambling services
+Andriy Ivchenko,AUTHORED,Study on online gambling and adequate measures for the protection of consumers of gambling services
 A4AI Affordability Report,ADDRESSES,Broadband Promotion
 Academy of European Law,ADDRESSES,Internet Gambling
 Academy of European Law,HOSTS,Gambling in the Single Market: One year after the action plan
 Access,ADDRESSES,Broadband Promotion
 Access,AUTHORED,The TelCo Action Plan
 Address Supporting Organization,ADVISES,Internet Corporation for Assigned Names and Numbers
-Address Supporting Organization (ASO),ADDRESSES,IPv6 Adoption
+Address Supporting Organization,ADDRESSES,IPv6 Adoption
 Afilias,ADDRESSES,IPv6 Adoption
 Afilias,SPONSORED,ION Belfast
 African Network Information Center,HOSTS,AFRINIC 21
-African Network Information Center (AfriNIC),ADDRESSES,IPv6 Adoption
+African Network Information Center,ADDRESSES,IPv6 Adoption
 AFRINIC 21,ADDRESSES,IPv6 Adoption
 AG-2005-RES-09,ADDRESSES,Child Pornography
 AG-2009-RES-05,ADDRESSES,Child Pornography
@@ -42,7 +42,7 @@ Alliance for Affordable Internet,ADDRESSES,Broadband Promotion
 Alliance for Affordable Internet,AUTHORED,A4AI Affordability Report
 Allied Fiber,ADDRESSES,Broadband Promotion
 American Registry for Internet Numbers,HOSTS,ARIN 34
-American Registry for Internet Numbers (ARIN),ADDRESSES,IPv6 Adoption
+American Registry for Internet Numbers,ADDRESSES,IPv6 Adoption
 Amir Dossal,ADDRESSES,Broadband Promotion
 Amir Herzberg,ADDRESSES,DNS Security
 Amir Herzberg,AUTHORED,Retrofitting Security into Network Protocols: The Case of DNSSEC
@@ -62,12 +62,12 @@ Ashish Birla,ADDRESSES,IPv6 Adoption
 Ashish Birla,AUTHORED,Framework to Counter Challenges of Transition to IPv6
 Asia-Pacific Economic Cooperation,ADDRESSES,Child Pornography
 Asia-Pacific Economic Cooperation,CONVENED,APEC-OECD Joint Symposium on Initiatives among Member Economies Promoting Safer Internet Environment for Children
-Asia-Pacific Network Information Center ,HOSTS,APNIC 38
-Asia-Pacific Network Information Center (APNIC),ADDRESSES,IPv6 Adoption
+Asia-Pacific Network Information Center,HOSTS,APNIC 38
+Asia-Pacific Network Information Center,ADDRESSES,IPv6 Adoption
 Association of Charity Lotteries in the European Union,ADDRESSES,Internet Gambling
 Association of Charity Lotteries in the European Union,AUTHORED,Charity Lotteries: Turning Chance into Change
 At-Large Advisory Committee,ADDRESSES,DNS Security
-At-Large Advisory Committee ,ESTABLISHED,DNS Security and Stability Analysis Working Group
+At-Large Advisory Committee,ESTABLISHED,DNS Security and Stability Analysis Working Group
 Australian High Tech Crime Centre,ADDRESSES,Child Pornography
 Australian High Tech Crime Centre,AUTHORED,A Typology of Online Child Pornography Offending 
 Australian Institute of Criminology,ADDRESSES,Child Pornography
@@ -75,7 +75,7 @@ Australian Institute of Criminology,AUTHORED,A Typology of Online Child Pornogra
 Belgian Gaming Commission,ADDRESSES,Internet Gambling
 Belgian Gaming Commission,HOSTS,Conference on the role of authorities in regulating gambling
 Bernadette H. Schella,ADDRESSES,Child Pornography
-Bernadette H. Schella,AUTHORED,Cyber child pornography: A review paper of the social and legal issues and remedies—and a proposed technological solution
+Bernadette H. Schella,AUTHORED,Cyber child pornography: A review paper of the social and legal issues and remedies and a proposed technological solution
 Beyond Tolerance: Child Pornography on the Internet,ADDRESSES,Child Pornography
 Bill Manning,ADDRESSES,DNS Security
 Bill Manning,DEVELOPED,CADR
@@ -83,13 +83,13 @@ BIND,ADDRESSES,DNS Security
 Bob Hinden,ADDRESSES,IPv6 Adoption
 Bob Hinden,LEADS,"IETF Working Group, IPv6 Maintenance"
 Brian Haberman,ADDRESSES,IPv6 Adoption
-Brian Haberman,LEADS,Internet Engineering Task Force (IETF)
+Brian Haberman,LEADS,Internet Engineering Task Force
 Broadband Leadership Summit,ADDRESSES,Broadband Promotion
 Broadband Traffic Management,ADDRESSES,Broadband Promotion
 Broadband World Forum,ADDRESSES,Broadband Promotion
 Building a 21st Century Broadband Superhighway,ADDRESSES,Broadband Promotion
 Building Broadband: Strategies and Policies for the Developing World,ADDRESSES,Broadband Promotion
-C. Codagnone,AUTHORED,Study on online gambling and adequate measures for the protection of consumers of gambling services
+Cristiano Codagnone,AUTHORED,Study on online gambling and adequate measures for the protection of consumers of gambling services
 CADR,ADDRESSES,DNS Security
 Campaign Against International Child Abduction,ADDRESSES,Child Pornography
 Challenges and Solutions for DNS Security in IPv6,ADDRESSES,DNS Security
@@ -108,8 +108,8 @@ Child Rights Connect,MEMBER_OF,Internet Watch Foundation
 Child Rights Connect,AUTHORED,Child Rights Connect Annual Report 2013
 Child Rights Connect Annual Report 2013,ADDRESSES,Child Pornography
 Children and Internet Pornography: The Nature of the Problem and the Technologies for a Solution,ADDRESSES,Child Pornography
-Children’s Charities’ Coalition on Internet Safety,ADDRESSES,Child Pornography
-Children’s Charities’ Coalition on Internet Safety,AUTHORED,Joint Report on Online Child Protection: Combatting Child Pornography on the Internet
+Children's Charities' Coalition on Internet Safety,ADDRESSES,Child Pornography
+Children's Charities' Coalition on Internet Safety,AUTHORED,Joint Report on Online Child Protection: Combatting Child Pornography on the Internet
 Chris Griffiths,ADDRESSES,DNS Security
 Christoph Meinel,ADDRESSES,DNS Security
 Christoph Meinel,AUTHORED,Challenges and Solutions for DNS Security in IPv6
@@ -119,9 +119,9 @@ Christopher R. Reed,AUTHORED,Children and Internet Pornography: The Nature of th
 "Cisco Systems, Inc",ADDRESSES,IPv6 Adoption
 "Cisco Systems, Inc",AUTHORED,Enhanced Interior Gateway Routing Protocol
 "Cisco Systems, Inc",AUTHORED,Planning for Progress - Why National Broadband Plans Matter
-"Cisco Systems, Inc",AUTHORED,"World Economic Forum Global Information Technology Report 2013, Chapter 1.3 by Cisco."
-"Cisco Systems, Inc.",AUTHORED,"DNSSEC: The Protocol, Deployment, and a Bit of Development"
-"Cisco Systems, Inc.",AUTHORED,"DNS Best Practices, Network Protections, and Attack Identification"
+"Cisco Systems, Inc",AUTHORED,"World Economic Forum Global Information Technology Report 2013, Chapter 1.3  by Cisco"
+"Cisco Systems, Inc",AUTHORED,"DNSSEC: The Protocol, Deployment, and a Bit of Development"
+"Cisco Systems, Inc",AUTHORED,"DNS Best Practices, Network Protections, and Attack Identification"
 "Commerce Department, ICANN and VeriSign Deploy New Technology to Enhance the Security and Stability of the Internet",ADDRESSES,DNS Security
 Commission Recommendation: on principles for the protection of consumers and players of online gambling services and for the prevention of minors from gambling online,ADDRESSES,Internet Gambling
 Commonwealth Telecommunications Organisation,ADDRESSES,Broadband Promotion
@@ -144,7 +144,7 @@ CP80 Foundation,CREATED,CP80 Internet Zoning Initiative
 CP80 Internet Zoning Initiative,ADDRESSES,Child Pornography
 Crimes Against Children Conference,ADDRESSES,Child Pornography
 Cristiano Codagnone,ADDRESSES,Internet Gambling
-Cyber child pornography: A review paper of the social and legal issues and remedies—and a proposed technological solution,ADDRESSES,Child Pornography
+Cyber child pornography: A review paper of the social and legal issues and remedies and a proposed technological solution,ADDRESSES,Child Pornography
 CyberTipline,ADDRESSES,Child Pornography
 Cyrille J.C.F. Fijnaut,ADDRESSES,Internet Gambling
 Cyrille J.C.F. Fijnaut,AUTHORED,In the Shadow of Luxembourg: EU and National Developments in the Regulation of Gambling
@@ -166,8 +166,8 @@ Dimitrios Doukas,AUTHORED,In a Bet there is a Fool and a State Monopoly: Are the
 DLV Test Zones,ADDRESSES,DNS Security
 "DNS Best Practices, Network Protections, and Attack Identification",ADDRESSES,DNS Security
 DNS Security and Stability Analysis Working Group,ADDRESSES,DNS Security
-DNS Security and Stability Analysis Working Group ,AUTHORED,DNS Security and Stability Analysis Working Group (DSSA) Final Report
-DNS Security and Stability Analysis Working Group (DSSA) Final Report,ADDRESSES,DNS Security
+DNS Security and Stability Analysis Working Group,AUTHORED,DNS Security and Stability Analysis Working Group Final Report
+DNS Security and Stability Analysis Working Group Final Report,ADDRESSES,DNS Security
 DNS Security Extensions (Verisign),ADDRESSES,DNS Security
 DNSCheck,ADDRESSES,DNS Security
 DNSKEY Flags,ADDRESSES,DNS Security
@@ -183,12 +183,12 @@ DNSSEC Tools,ADDRESSES,DNS Security
 "DNSSEC: The Protocol, Deployment, and a Bit of Development",ADDRESSES,DNS Security
 Domain Name System (DNS) Security Reference Architecture,ADDRESSES,DNS Security
 Domain Name System Operations Analysis and Research Center,ADDRESSES,DNS Security
-Domain Name System Operations Analysis and Research Center (DNS-OARC),MAINTAINS,DLV Test Zones
+Domain Name System Operations Analysis and Research Center,MAINTAINS,DLV Test Zones
 Domain Name System Security (DNSSEC) Algorithm Numbers,ADDRESSES,DNS Security
 Dominik Herrmann,ADDRESSES,DNS Security
 Dominik Herrmann,AUTHORED,Evaluating the Security of a DNS Query Obfuscation Scheme for Private Web Surfing
 Doyle Gallegos,ADDRESSES,Broadband Promotion
-Doyle Gallegos ,AUTHORED,Partnerships for Broadband: Innovative public private partnerships will support the expansion of broadband networks
+Doyle Gallegos,AUTHORED,Partnerships for Broadband: Innovative public private partnerships will support the expansion of broadband networks
 Dr. Hamadoun I. Toure ,ADDRESSES,Broadband Promotion
 Dr. Hamadoun I. Toure ,LEADS,International Telecommunications Union
 Dr. Weixiao Wei,ADDRESSES,Child Pornography
@@ -213,14 +213,14 @@ European Commission,ADOPTED,Commission Recommendation: on principles for the pro
 European Commission,AUTHORED,GREEN PAPER On on-line gambling in the Internal Market
 European Commission,AUTHORED,Towards a comprehensive European framework for online gambling
 European Commission,AUTHORED,Study Of Gambling Services In The Internal Market Of The European Union
-European Commission,AUTHORED,Public Consultation on On-line gambling in the Internal Market – Frequently asked questions
+European Commission,AUTHORED,Public Consultation on On-line gambling in the Internal Market - Frequently asked questions
 European Commission,AUTHORED,"Free movement of services: Commission inquires into restrictions on the provision of certain gambling services in Austria, France and Italy"
 European Commission Directorate General Internal Market and Services,HOSTS,Workshop I: On-line Gambling and Sport Integrity
 European Committee for Standardization,ADDRESSES,Internet Gambling
 European Cybercrime Centre at Europol,ADDRESSES,Child Pornography
 European Cybercrime Centre at Europol,AUTHORED,"First Year Report, European Cybercrime Center (EC3)"
 European Economic and Social Committee,ADDRESSES,Internet Gambling
-European Economic and Social Committee,AUTHORED,On-line gambling – After the Green Paper which way forward
+European Economic and Social Committee,AUTHORED,On-line gambling - After the Green Paper which way forward
 European Financial Coalition,ADDRESSES,Child Pornography
 European Gaming and Amusement Federation,ADDRESSES,Internet Gambling
 European Gaming and Amusement Federation,AUTHORED,"Responsible gaming, a Statement of Principles and a Showcase of Best Practice from the European Gaming and Amusement Industry"
@@ -238,12 +238,12 @@ European Parliament resolution of 15 November 2011 on online gambling in the Int
 European Parliament resolution on the integrity of online gambling,ADDRESSES,Internet Gambling
 European Union Agency for Network and Information Security,ADDRESSES,DNS Security
 European Union Agency for Network and Information Security,AUTHORED,Good Practices Guide for Deploying DNSSEC
-European Union Agency for Network and Information Security (ENISA),AUTHORED,"Resilience Features in Communication Networks: IPv6, DNSSEC and MPLS"
-European Union Agency for Network and Information Security (ENISA),AUTHORED,Study on the Costs of DNSSEC Deployment
+European Union Agency for Network and Information Security,AUTHORED,"Resilience Features in Communication Networks: IPv6, DNSSEC and MPLS"
+European Union Agency for Network and Information Security,AUTHORED,Study on the Costs of DNSSEC Deployment
 Europol,ADDRESSES,Child Pornography
 Europol,HOSTS,European Cybercrime Centre at Europol
 Evaluating the Security of a DNS Query Obfuscation Scheme for Private Web Surfing,ADDRESSES,DNS Security
-F. Bogliacino,AUTHORED,Study on online gambling and adequate measures for the protection of consumers of gambling services
+Francesco Bogliacino,AUTHORED,Study on online gambling and adequate measures for the protection of consumers of gambling services
 F1,ADDRESSES,Child Pornography
 "Fair, honest, safe and fun: the case of cross border gambling in the European Union",ADDRESSES,Internet Gambling
 Financial Coalition Against Child Pornography,ADDRESSES,Child Pornography
@@ -259,12 +259,12 @@ Friend Media Technology Systems Ltd,ADDRESSES,Child Pornography
 Friend Media Technology Systems Ltd,DEVELOPED,F1
 G. Gaskell,ADDRESSES,Internet Gambling
 G. Gaskell,AUTHORED,Study on online gambling and adequate measures for the protection of consumers of gambling services
-G. Veltri,AUTHORED,Study on online gambling and adequate measures for the protection of consumers of gambling services
+Giuseppe Veltri,AUTHORED,Study on online gambling and adequate measures for the protection of consumers of gambling services
 Gambling in the Single Market: One year after the action plan,ADDRESSES,Internet Gambling
 Gaming Regulators European Forum,ADDRESSES,Internet Gambling
 GbDns,ADDRESSES,DNS Security
 Generic Names Supporting Organization,ADDRESSES,DNS Security
-Generic Names Supporting Organization ,ESTABLISHED,DNS Security and Stability Analysis Working Group
+Generic Names Supporting Organization,ESTABLISHED,DNS Security and Stability Analysis Working Group
 Geoff Huston,ADDRESSES,IPv6 Adoption
 Geoff Huston,AUTHORED,Understanding IPv6 populations in the wild
 George Michaelson,ADDRESSES,IPv6 Adoption
@@ -280,14 +280,14 @@ Global IPv6 Advancement Program,ADDRESSES,IPv6 Adoption
 Global IPv6 and Next Generation Internet Summit 2014,ADDRESSES,IPv6 Adoption
 Global Policy for Post Exhaustion IPv4 Allocation Mechanisms by the IANA,ADDRESSES,IPv6 Adoption
 Good Practices Guide for Deploying DNSSEC,ADDRESSES,DNS Security
-Google,DEVELOPED,IPv6 Statistics - Google
+"Google, Inc.",DEVELOPED,IPv6 Statistics - Google
 Google Fiber,ADDRESSES,Broadband Promotion
 Google Public DNS,ADDRESSES,DNS Security
 "Google, Inc.",ADDRESSES,DNS Security
 "Google, Inc.",DEVELOPED,Google Public DNS
 GREEN PAPER On on-line gambling in the Internal Market,ADDRESSES,Internet Gambling
 GSMA Mobile Alliance Against Child Sexual Abuse Content,AUTHORED,GSMA-INHOPE Guide to Establishing an Internet Hotline
-GSMA Mobile Alliance Against Child Sexual Abuse Content,COLLABORATED_ON,The Financial Coalition Against Child Pornography
+GSMA Mobile Alliance Against Child Sexual Abuse Content,COLLABORATED_ON,Financial Coalition Against Child Pornography
 GSMA Mobile Alliance Against Child Sexual Abuse Content,MEMBER_OF,European Financial Coalition
 GSMA Mobile Alliance Against Child Sexual Abuse Content,ADDRESSES,Child Pornography
 GSMA-INHOPE Guide to Establishing an Internet Hotline,ADDRESSES,Child Pornography
@@ -330,41 +330,40 @@ In a Bet there is a Fool and a State Monopoly: Are the Odds Stacked against Cros
 In the Shadow of Luxembourg: EU and National Developments in the Regulation of Gambling,ADDRESSES,Internet Gambling
 Information and Communications for Development 2009: Extending Reach and Increasing Impact,ADDRESSES,Broadband Promotion
 Information Technology & Innovation Foundation,ADDRESSES,Broadband Promotion
-Information Technology & Innovation Foundation,AUTHORED,International Broadband Quality: How’s that Policy Working? 
+Information Technology & Innovation Foundation,AUTHORED,International Broadband Quality: How's that Policy Working? 
 InHope,ADDRESSES,Child Pornography
 InHope,CREATED,Report Illegal Content
-InHope,PROVIDES,Report Illegal Content
 InHope,AUTHORED,GSMA-INHOPE Guide to Establishing an Internet Hotline
 InHope Foundation,ADDRESSES,Child Pornography
 InHope Illegal Content Reporting,ADDRESSES,Child Pornography
 Innovations in the Fight Against Human Trafficking Perspectives and Proposals,ADDRESSES,Child Pornography
 International Association of Gaming Regulators,ADDRESSES,Internet Gambling
-International Broadband Quality: How’s that Policy Working? ,ADDRESSES,Broadband Promotion
+International Broadband Quality: How's that Policy Working? ,ADDRESSES,Broadband Promotion
 International Centre for Missing & Exploited Children,ADDRESSES,Child Pornography
 International Centre for Missing & Exploited Children,ORGANIZED,Campaign Against International Child Abduction
-International Centre for Missing & Exploited Children,CREATED,Don’t You Forget About Me YouTube Channel
+International Centre for Missing & Exploited Children,CREATED,Don't You Forget About Me YouTube Channel
 International Centre for Missing & Exploited Children,AUTHORED,Joint Report on Online Child Protection: Combatting Child Pornography on the Internet
 International Child Abduction Attorney Network,ADDRESSES,Child Pornography
 International Child Abduction Database,ADDRESSES,Child Pornography
-International Criminal Police Organization ,AUTHORED,AG-2011-RES-05
-International Criminal Police Organization ,AUTHORED,AG-2011-RES-08
-International Criminal Police Organization ,AUTHORED,AG-2010-RES-05
-International Criminal Police Organization ,AUTHORED,AG-2009-RES-05
-International Criminal Police Organization ,AUTHORED,AG-2005-RES-09
-International Criminal Police Organization ,MEMBER_OF,Virtual Global Task Force
-International Criminal Police Organization ,MEMBER_OF,National Center for Missing & Exploited Children
-International Criminal Police Organization ,HOSTS,29th Meeting of the INTERPOL Specialist Group on Crimes against Children
-International Criminal Police Organization (INTERPOL),ADDRESSES,Child Pornography
+International Criminal Police Organization,AUTHORED,AG-2011-RES-05
+International Criminal Police Organization,AUTHORED,AG-2011-RES-08
+International Criminal Police Organization,AUTHORED,AG-2010-RES-05
+International Criminal Police Organization,AUTHORED,AG-2009-RES-05
+International Criminal Police Organization,AUTHORED,AG-2005-RES-09
+International Criminal Police Organization,MEMBER_OF,Virtual Global Task Force
+International Criminal Police Organization,MEMBER_OF,National Center for Missing & Exploited Children
+International Criminal Police Organization,HOSTS,29th Meeting of the INTERPOL Specialist Group on Crimes against Children
+International Criminal Police Organization,ADDRESSES,Child Pornography
 International Telecommunication Union,ADDRESSES,IPv6 Adoption
 International Telecommunication Union,ORGANIZED,ITU Telecom World 2014
-International Telecommunications Union,ADDRESSES,Broadband Promotion
-International Telecommunications Union,AUTHORED,Planning for Progress - Why National Broadband Plans Matter
-International Telecommunications Union,AUTHORED,Measuring the Information Society
-International Telecommunications Union,AUTHORED,Confronting the Crisis: ICT Plans for Economic Growth
-International Telecommunications Union,AUTHORED,World Telecommunications Development Report: Reinventing Telecoms
-International Telecommunications Union,CREATED,The Broadband Commission for Digital Development
-International Telecommunications Union,HOSTS,Broadband Leadership Summit
-International Telecommunications Union,HOSTS,World Telecommunication Policy Forum
+International Telecommunication Union,ADDRESSES,Broadband Promotion
+International Telecommunication Union,AUTHORED,Planning for Progress - Why National Broadband Plans Matter
+International Telecommunication Union,AUTHORED,Measuring the Information Society
+International Telecommunication Union,AUTHORED,Confronting the Crisis: ICT Plans for Economic Growth
+International Telecommunication Union,AUTHORED,World Telecommunications Development Report: Reinventing Telecoms
+International Telecommunication Union,CREATED,The Broadband Commission for Digital Development
+International Telecommunication Union,HOSTS,Broadband Leadership Summit
+International Telecommunication Union,HOSTS,World Telecommunication Policy Forum
 Internet Address Space: Economic Considerations in the Management of IPv4 and in the Deployment of IPv6,ADDRESSES,IPv6 Adoption
 Internet Addressing: Measuring Deployment of IPv6,ADDRESSES,IPv6 Adoption
 Internet Architecture Board,ADDRESSES,IPv6 Adoption
@@ -372,7 +371,7 @@ Internet Architecture Board,OVERSEES,Internet Engineering Task Force
 Internet Assigned Numbers Authority,ADDRESSES,DNS Security
 Internet Assigned Numbers Authority,MAINTAINS,Domain Name System Security (DNSSEC) Algorithm Numbers
 Internet Assigned Numbers Authority,MAINTAINS,DNSKEY Flags
-Internet Assigned Numbers Authority (IANA),OPERATES,Trust Anchors and Keys
+Internet Assigned Numbers Authority,OPERATES,Trust Anchors and Keys
 Internet Assigned Numbers Authority (IANA) Policy for Allocation of ASN Blocks to Regional Internet Registries,ADDRESSES,IPv6 Adoption
 Internet Assigned Numbers Authority (IANA) Policy For Allocation of IPv6 Blocks to Regional Internet Registries,ADDRESSES,IPv6 Adoption
 Internet Child Pornography and the Law: National and International Responses,ADDRESSES,Child Pornography
@@ -382,14 +381,14 @@ Internet Corporation for Assigned Names and Numbers,AUTHORED,Internet Assigned N
 Internet Corporation for Assigned Names and Numbers,AUTHORED,Internet Assigned Numbers Authority (IANA) Policy for Allocation of ASN Blocks to Regional Internet Registries
 Internet Corporation for Assigned Names and Numbers,AUTHORED,Global Policy for Post Exhaustion IPv4 Allocation Mechanisms by the IANA
 Internet Corporation for Assigned Names and Numbers,AUTHORED,ICP-2: Criteria for Establishment of New Regional Internet Registries
-Internet Corporation for Assigned Names and Numbers ,HOSTS,DNSSEC for Everybody: A Beginner's Guide
+Internet Corporation for Assigned Names and Numbers,HOSTS,DNSSEC for Everybody: A Beginner's Guide
 Internet Engineering Steering Group,ADDRESSES,IPv6 Adoption
 Internet Engineering Steering Group,MANAGES,Internet Engineering Task Force
 Internet Engineering Task Force,ADDRESSES,DNS Security
 Internet Engineering Task Force,AUTHORED,RFC 6781 - DNSSEC Operational Practices Version 2
 Internet Engineering Task Force,AUTHORED,Operational Guidance for IPv6 Deployment in IPv4 Sites Using the Intra-Site Automatic Tunnel Addressing Protocol (ISATAP)
 Internet Engineering Task Force,AUTHORED,RFC 6180 - Guidelines for Using IPv6 Transition Mechanisms during IPv6 Deployment
-Internet Engineering Task Force,AUTHORED,RFC 3315 - Dynamic Host Configuration Protocol for IPv6 (DHCPv6)
+Internet Engineering Task Force,AUTHORED,RFC 3315 -  Dynamic Host Configuration Protocol for IPv6 (DHCPv6)
 Internet Engineering Task Force,AUTHORED,RFC 3736 - Stateless Dynamic Host Configuration Protocol (DHCP) Service for IPv6
 Internet Engineering Task Force,AUTHORED,RFC 4443 - Internet Control Message Protocol (ICMPv6) for the Internet Protocol Version 6 (IPv6) Specification
 Internet Engineering Task Force,AUTHORED,RFC 5072 - IP Version 6 over PPP
@@ -460,8 +459,8 @@ Kimberly J. Mitchell,AUTHORED,Defining Child Pornography: Law Enforcement Dilemm
 Korea Communications Commission,ADDRESSES,Child Pornography
 Korea Communications Commission,HOSTS,Seoul Ministerial Meeting on the Future of the Internet Economy
 LACNIC 22,ADDRESSES,IPv6 Adoption
-Latin America and Caribbean Network Information Center ,HOSTS,LACNIC 22
-Latin America and Caribbean Network Information Center (LACNIC),ADDRESSES,IPv6 Adoption
+Latin America and Caribbean Network Information Center,HOSTS,LACNIC 22
+Latin America and Caribbean Network Information Center,ADDRESSES,IPv6 Adoption
 ldns,ADDRESSES,DNS Security
 Lee Howard,ADDRESSES,IPv6 Adoption
 Lee Howard,AUTHORED,A Comparison of Public Policy Approaches to the IPv4-IPv6 Transition
@@ -470,7 +469,7 @@ Lixia Zhang,ADDRESSES,DNS Security
 Lixia Zhang,AUTHORED,Deploying Cryptography in Internet-Scale Systems: A Case Study on DNSSEC
 LTE North America 2014,ADDRESSES,Broadband Promotion
 Luis Rueda,ADDRESSES,Child Pornography
-Luis Rueda,AUTHORED,Cyber child pornography: A review paper of the social and legal issues and remedies—and a proposed technological solution
+Luis Rueda,AUTHORED,Cyber child pornography: A review paper of the social and legal issues and remedies and a proposed technological solution
 Manifesto for a sustainable EU Policy for Online Gambling,ADDRESSES,Internet Gambling
 Manish Karir,ADDRESSES,IPv6 Adoption
 Manish Karir,AUTHORED,Understanding IPv6 populations in the wild
@@ -486,7 +485,7 @@ Melissa Wells,AUTHORED,Defining Child Pornography: Law Enforcement Dilemmas in I
 Michael Bailey,ADDRESSES,IPv6 Adoption
 Michael Bailey,AUTHORED,Understanding IPv6 populations in the wild
 Michael Combes,ADDRESSES,Broadband Promotion
-Microsoft,SPONSORED,Wanted: Technology Breakthroughs to Fight Child Sex Trafficking
+Microsoft Corporation,SPONSORED,Wanted: Technology Breakthroughs to Fight Child Sex Trafficking
 Microsoft Child Exploitation Tracking System,ADDRESSES,Child Pornography
 Microsoft Corporation,ADDRESSES,Child Pornography
 Microsoft Corporation,FUNDS,International Centre for Missing & Exploited Children
@@ -494,14 +493,16 @@ Microsoft Corporation,DEVELOPED,PhotoDNA
 Microsoft Corporation,DEVELOPED,Microsoft Child Exploitation Tracking System
 Microsoft Corporation,DEVELOPED,Video Image Classification Standard
 Microsoft Corporation,MANAGES,Wanted: Technology Breakthroughs to Fight Child Sex Trafficking
-Microsoft Corporation,ORGANIZED,DCU and Microsoft Research Technology Task Force
-Microsoft Digital Crimes Unit (DCU),ADDRESSES,Child Pornography
+Microsoft Corporation,ORGANIZED,Microsoft Research Technology Task Force
+Microsoft Digital Crimes Unit,ADDRESSES,Child Pornography
+Microsoft Corporation,CREATED,Microsoft Digital Crimes Unit
 Miguel Vargas Martin,ADDRESSES,Child Pornography
-Miguel Vargas Martin,AUTHORED,Cyber child pornography: A review paper of the social and legal issues and remedies—and a proposed technological solution
+Miguel Vargas Martin,AUTHORED,Cyber child pornography: A review paper of the social and legal issues and remedies and a proposed technological solution
 Mukom Akong Tamon,ADDRESSES,IPv6 Adoption
 Mukom Akong Tamon,AUTHORED,How to Translate a Gov't IPv6 Mandate Into an Action Plan: Guidance for National IPv6 Task Forces
-Mukom Akong Tamon,AUTHORED,IP Addresses in Cars; Car Manufacturers as Internet Registries? - Another Need for IPv6 Now!
-Mukom Akong Tamon,AUTHORED,"The Importance of IP Resource Planning in Government ICT Strategic Plans, How Can Managers Support Their Engineers Deploy IPv6?"
+Mukom Akong Tamon,AUTHORED,"IP Addresses in Cars, Car Manufacturers as Internet Registries? - Another Need for IPv6 Now!"
+Mukom Akong Tamon,AUTHORED,The Importance of IP Resource Planning in Government ICT Strategic Plans
+Mukom Akong Tamon,AUTHORED,How Can Managers Support Their Engineers Deploy IPv6?
 Mukom Akong Tamon,AUTHORED,Designing Effective Regulation for IPv6 Adoption
 Nancy Hafkin,ADDRESSES,Broadband Promotion
 National Broadband Plans Show a Diversity of Methods but a Unity of Purpose,ADDRESSES,Broadband Promotion
@@ -510,15 +511,15 @@ National Center for Missing & Exploited Children,PARTNER_WITH,Campaign Against I
 National Center for Missing & Exploited Children,FOUNDED,URL Initiative
 National Center for Missing & Exploited Children,FOUNDED,PhotoDNA
 National Center for Missing & Exploited Children,FOUNDED,Hash Value Sharing Initiative
-National Center for Missing & Exploited Children,MANAGES,Financial Coalitiion Against Child Pornorgraphy
+National Center for Missing & Exploited Children,MANAGES,Financial Coalition Against Child Pornorgraphy
 National Center for Missing & Exploited Children,OPERATES,CyberTipline
 National Institute of Science and Technology,ADDRESSES,DNS Security
 National Telecommunications & Information Administration,ADDRESSES,Broadband Promotion
 Nele Hoekx,ADDRESSES,Internet Gambling
 Nele Hoekx,AUTHORED,In the Shadow of Luxembourg: EU and National Developments in the Regulation of Gambling
-Net Hope,CREATED,Global Broadband and Innovations 
+NetHope,CREATED,Global Broadband and Innovations 
 NetHope,ADDRESSES,Broadband Promotion
-Next Generation Connectivity: A Review of broadband Internet transitions and policy from around the world.,ADDRESSES,Broadband Promotion
+Next Generation Connectivity: A Review of broadband Internet transitions and policy from around the world,ADDRESSES,Broadband Promotion
 NLnet Labs,ADDRESSES,DNS Security
 NLnet Labs,DEVELOPED,ldns
 NLnet Labs,DEVELOPED,Unbound
@@ -529,13 +530,13 @@ Nominet Trust,ADDRESSES,Child Pornography
 Nominet Trust,FUNDS,"Online Child Sexual Abuse Content: The development of a comprehensive, transferable international internet notice and takedown system"
 North American IPv6 Summit 2014,ADDRESSES,IPv6 Adoption
 Number Resource Organization,ADDRESSES,DNS Security
-Number Resource Organization,COORDINATES,Asia-Pacific Network Information Center 
+Number Resource Organization,COORDINATES,Asia-Pacific Network Information Center
 Number Resource Organization,COORDINATES,Latin America and Caribbean Network Information Center
 Number Resource Organization,COORDINATES,American Registry for Internet Numbers
 Number Resource Organization,COORDINATES,African Network Information Center
 Number Resource Organization,COORDINATES,Réseaux IP Européens Network Coordination Centre
-Number Resource Organization ,ESTABLISHED,DNS Security and Stability Analysis Working Group
-Number Resource Organization (NRO),ADDRESSES,IPv6 Adoption
+Number Resource Organization,ESTABLISHED,DNS Security and Stability Analysis Working Group
+Number Resource Organization,ADDRESSES,IPv6 Adoption
 OCCAID,ADDRESSES,IPv6 Adoption
 OCCAID,HOSTS,Global IPv6 Advancement Program
 OECD Seoul Declaration for the Future of the Internet Economy,ADDRESSES,Child Pornography
@@ -544,19 +545,19 @@ Olaf Kolkman,AUTHORED,DNSSEC HOWTO: a tutorial in disguise
 Ole Troan,ADDRESSES,IPv6 Adoption
 Ole Troan,LEADS,"IETF Working Group, IPv6 Maintenance"
 Omobola Johnson,ADDRESSES,Broadband Promotion
-On-line gambling – After the Green Paper which way forward,ADDRESSES,Internet Gambling
+On-line gambling - After the Green Paper which way forward,ADDRESSES,Internet Gambling
 "Online Child Sexual Abuse Content: The development of a comprehensive, transferable international internet notice and takedown system",ADDRESSES,Child Pornography
 Online Gambling: Focusing on integrity and a code of conduct for gambling,ADDRESSES,Internet Gambling
 OpenDNSSEC,ADDRESSES,DNS Security
 Operation Predator,ADDRESSES,Child Pornography
 Operational Guidance for IPv6 Deployment in IPv4 Sites Using the Intra-Site Automatic Tunnel Addressing Protocol (ISATAP),ADDRESSES,IPv6 Adoption
-"Optional Protocol on the Sale of Children, Child Prostitution and Child Pornography – a protocol to the Convention on the Rights of the Child",ADDRESSES,Child Pornography
+"Optional Protocol on the Sale of Children, Child Prostitution and Child Pornography - a protocol to the Convention on the Rights of the Child",ADDRESSES,Child Pornography
 Optional Protocol to the Convention on the Rights of the Child on a Communications Procedure,ADDRESSES,Child Pornography
 Parliamentary Assembly of the Council of Europe,ADDRESSES,Internet Gambling
 Parliamentary Assembly of the Council of Europe,AUTHORED,Draft Council of Europe Convention on the Manipulation of Sports Competitions
 Partnerships for Broadband: Innovative public private partnerships will support the expansion of broadband networks,ADDRESSES,Broadband Promotion
 Patrick C.K. Hung,ADDRESSES,Child Pornography
-Patrick C.K. Hung,AUTHORED,Cyber child pornography: A review paper of the social and legal issues and remedies—and a proposed technological solution
+Patrick C.K. Hung,AUTHORED,Cyber child pornography: A review paper of the social and legal issues and remedies and a proposed technological solution
 Paul Jacobs,ADDRESSES,Broadband Promotion
 Paul Mitchell,ADDRESSES,Broadband Promotion
 Paul Weissmann,ADDRESSES,IPv6 Adoption
@@ -575,7 +576,7 @@ Preliminary analysis into commercial child sexual abuse material distributor acc
 Project VIC,ADDRESSES,Child Pornography
 Project VIC,PARTNER_WITH,Virtual Global Task Force
 Project VIC,DEVELOPED,Video Image Classification Standard
-Public Consultation on On-line gambling in the Internal Market – Frequently asked questions,ADDRESSES,Internet Gambling
+Public Consultation on On-line gambling in the Internal Market - Frequently asked questions,ADDRESSES,Internet Gambling
 Public Safety Broadband Summit ,ADDRESSES,Broadband Promotion
 QED,ADDRESSES,Internet Gambling
 QED,HOSTS,QED Conference - Legislating European gambling: what's next on the agenda?
@@ -595,15 +596,15 @@ Réseaux IP Européens Network Coordination Centre,HOSTS,RIPE 69
 Réseaux IP Européens Network Coordination Centre,AUTHORED,IPv6 Address Allocation and Assignment Policy
 Réseaux IP Européens Network Coordination Centre,DEVELOPED,RIPE Labs
 Réseaux IP Européens Network Coordination Centre,DEVELOPED,The IPv6 Analyser
-Réseaux IP Européens Network Coordination Centre ,AUTHORED,DNSSEC Policy and Practice Statement
-Réseaux IP Européens Network Coordination Centre (RIPE NCC),ADDRESSES,IPv6 Adoption
-Réseaux IP Européens Network Coordination Centre (RIPE NCC),DEVELOPED,DNSSEC Key Management Tools
+Réseaux IP Européens Network Coordination Centre,AUTHORED,DNSSEC Policy and Practice Statement
+Réseaux IP Européens Network Coordination Centre,ADDRESSES,IPv6 Adoption
+Réseaux IP Européens Network Coordination Centre,DEVELOPED,DNSSEC Key Management Tools
 "Resilience Features in Communication Networks: IPv6, DNSSEC and MPLS",ADDRESSES,DNS Security
 Responsible Gaming Day,ADDRESSES,Internet Gambling
 "Responsible gaming, a Statement of Principles and a Showcase of Best Practice from the European Gaming and Amusement Industry",ADDRESSES,Internet Gambling
 Retrofitting Security into Network Protocols: The Case of DNSSEC,ADDRESSES,DNS Security
 Reza Jafari,ADDRESSES,Broadband Promotion
-Reza Jafari,LEADS,e-Development International 
+Reza Jafari,LEADS,e-Development International
 RFC 2080 - RIPng for IPv6,ADDRESSES,IPv6 Adoption
 RFC 2535 - Domain Name System Security Extensions,ADDRESSES,DNS Security
 RFC 2545 - Use of BGP-4 Multiprotocol Extensions for IPv6 Inter-Domain Routing,ADDRESSES,IPv6 Adoption
@@ -643,7 +644,7 @@ Samita Chakrabarti,ADDRESSES,IPv6 Adoption
 Samita Chakrabarti,LEADS,"IETF Working Group, IPv6 over Networks of Resource-constrained Nodes"
 Scott R. Rasmussen,ADDRESSES,Child Pornography
 Scott R. Rasmussen,AUTHORED,Children and Internet Pornography: The Nature of the Problem and the Technologies for a Solution
-Securing the Federal Government’s Domain Name System Infrastructure,ADDRESSES,DNS Security
+Securing the Federal Government's Domain Name System Infrastructure,ADDRESSES,DNS Security
 Security and Stability Advisory Commission,ADDRESSES,DNS Security
 Seoul Ministerial Meeting on the Future of the Internet Economy,ADDRESSES,Child Pornography
 Seoul Ministerial Meeting on the Future of the Internet Economy,AUTHORED,OECD Seoul Declaration for the Future of the Internet Economy
@@ -666,14 +667,14 @@ Study Of Gambling Services In The Internal Market Of The European Union,ADDRESSE
 Study on online gambling and adequate measures for the protection of consumers of gambling services,ADDRESSES,Internet Gambling
 Study on the Costs of DNSSEC Deployment,ADDRESSES,DNS Security
 Susan Crawford,ADDRESSES,Broadband Promotion
-Susan Crawford,LEADS,Berkman Center
+Susan Crawford,LEADS,The Berkman Center
 Susan Crawford,LEADS,Telecommunications Equality Project
 Suvi Linden,ADDRESSES,Broadband Promotion
-Suvi Linden,IS_ENVOY,Broadband Commission for Digital Development
+Suvi Linden,IS_ENVOY,The Broadband Commission for Digital Development
 Taxation of internet gaming and gambling in the European Union,ADDRESSES,Internet Gambling
 Technology Task Force (DCU and Microsoft Research),ADDRESSES,Child Pornography
 Ted Lemon,ADDRESSES,IPv6 Adoption
-Ted Lemon,LEADS,Internet Engineering Task Force (IETF)
+Ted Lemon,LEADS,Internet Engineering Task Force
 Telecentre.org,ADDRESSES,Broadband Promotion
 Test Report: DNSSEC Impact on Broadband Routers and Firewalls,ADDRESSES,DNS Security
 The Berkman Center,AUTHORED,Next Generation Connectivity: A Review of broadband Internet transitions and policy from around the world
@@ -710,7 +711,7 @@ Towards a comprehensive European framework for online gambling,ADDRESSES,Interne
 Transition from IPv4 to IPv6: A state-of-the-art survey,ADDRESSES,IPv6 Adoption
 Trust Anchors and Keys,ADDRESSES,DNS Security
 U.S. Department of Commerce,ADDRESSES,DNS Security
-U.S. Department of Commerce ,AUTHORED,"Commerce Department, ICANN and VeriSign Deploy New Technology to Enhance the Security and Stability of the Internet"
+U.S. Department of Commerce,AUTHORED,"Commerce Department, ICANN and VeriSign Deploy New Technology to Enhance the Security and Stability of the Internet"
 U.S. Department of Homeland Security,ADDRESSES,DNS Security
 U.S. Department of Homeland Security,AUTHORED,Domain Name System (DNS) Security Reference Architecture
 Ulrich Herberg,ADDRESSES,IPv6 Adoption
@@ -718,18 +719,18 @@ Ulrich Herberg,LEADS,"IETF Working Group, IPv6 over Networks of Resource-constra
 Unbound,ADDRESSES,DNS Security
 Understanding IPv6 populations in the wild,ADDRESSES,IPv6 Adoption
 United Nations Committee on the Rights of the Child,ADDRESSES,Child Pornography
-United Nations Committee on the Rights of the Child,MONITORS,"Optional Protocol on the Sale of Children, Child Prostitution and Child Pornography – a protocol to the Convention on the Rights of the Child"
+United Nations Committee on the Rights of the Child,MONITORS,"Optional Protocol on the Sale of Children, Child Prostitution and Child Pornography - a protocol to the Convention on the Rights of the Child"
 United Nations Convention on the Rights of the Child,ADDRESSES,Child Pornography
 "United Nations Educational, Scientific and Cultural Organization",ADDRESSES,Broadband Promotion
 "United Nations Educational, Scientific and Cultural Organization",CREATED,The Broadband Commission for Digital Development
 United Nations General Assembly,ADDRESSES,Child Pornography
-United Nations General Assembly,ADOPTED,"Optional Protocol on the Sale of Children, Child Prostitution and Child Pornography – a protocol to the Convention on the Rights of the Child"
+United Nations General Assembly,ADOPTED,"Optional Protocol on the Sale of Children, Child Prostitution and Child Pornography - a protocol to the Convention on the Rights of the Child"
 United Nations General Assembly,ADOPTED,United Nations Convention on the Rights of the Child
 United States Department of Homeland Security Immigrations and Customs Enforcement,ADDRESSES,Child Pornography
 United States Department of Homeland Security Immigrations and Customs Enforcement,CREATED,Operation Predator
 Universal Service Policies in the Context of National Broadband Plans,ADDRESSES,Broadband Promotion
 URL Initiative,ADDRESSES,Child Pornography
-USAID,CREATED,Global Broadband and Innovations 
+U.S. Agency for International Development,CREATED,Global Broadband and Innovations 
 V6 World Congress,ADDRESSES,IPv6 Adoption
 VeriSign,ADDRESSES,DNS Security
 VeriSign,AUTHORED,DNS Security Extensions (Verisign)
@@ -748,27 +749,37 @@ Wanted: Technology Breakthroughs to Fight Child Sex Trafficking,ADDRESSES,Child 
 Wayne Thayer,ADDRESSES,DNS Security
 WBA Wi-Fi Industry Awards,ADDRESSES,Broadband Promotion
 White House Office of Management and Budget,ADDRESSES,DNS Security
-White House Office of Management and Budget ,AUTHORED,Securing the Federal Government’s Domain Name System Infrastructure
+White House Office of Management and Budget,AUTHORED,Securing the Federal Government's Domain Name System Infrastructure
 White House Office of Science and Technology Policy,ADDRESSES,DNS Security
-White House Office of Science and Technology Policy ,AUTHORED,A Major Milestone for Internet Security
+White House Office of Science and Technology Policy,AUTHORED,A Major Milestone for Internet Security
 Wi-Fi Global Congress,ADDRESSES,Broadband Promotion
 "Wi-Fi, Small Cells & Venue Connectivity Summit",ADDRESSES,Broadband Promotion
 Wireless Broadband Alliance,ADDRESSES,Broadband Promotion
-Wireless Broadband Alliance,HOSTS,"Wi-Fi Global Congress, WBA Wi-Fi Industry Awards"
+Wireless Broadband Alliance,HOSTS,Wi-Fi Global Congress
 Wireless Broadband Alliance,HOSTS,WBA Wi-Fi Industry Awards
 Workshop I: On-line Gambling and Sport Integrity,ADDRESSES,Internet Gambling
-"World Economic Forum Global Information Technology Report 2013, Chapter 1.3  by Cisco. ",ADDRESSES,Broadband Promotion
+"World Economic Forum Global Information Technology Report 2013, Chapter 1.3  by Cisco",ADDRESSES,Broadband Promotion
 World IPv6 Day,ADDRESSES,IPv6 Adoption
 World IPv6 Launch,ADDRESSES,IPv6 Adoption
 World IPv6 Launch Measurements,ADDRESSES,IPv6 Adoption
 World Summit on the Information Society in Tunis,ADDRESSES,Broadband Promotion
 World Summit on the Information Society in Tunis,LAUNCHED,Telecentre.org
 World Telecommunication Policy Forum,ADDRESSES,Broadband Promotion
-World Telecommunications Development Report: Reinventing Telecoms ,ADDRESSES,Broadband Promotion
+World Telecommunications Development Report: Reinventing Telecoms,ADDRESSES,Broadband Promotion
 World Wide Web Consortium,ADDRESSES,Child Pornography
-World Wide Web Consortium,CREATED,"Platform for Internet Content Selections, Sir Tim Berners Lee"
+World Wide Web Consortium,CREATED,Platform for Internet Content Selections
+Sir Tim Berners-Lee,LEADS,World Wide Web Consortium
 Worldwide Infrastructure Security Report,ADDRESSES,DNS Security
 Yaman Akdeniz,ADDRESSES,Child Pornography
 Yaman Akdeniz,AUTHORED,Internet Child Pornography and the Law: National and International Responses
 Yaman Akdeniz,AUTHORED,Chapter 13: Governance of Pornography and Child Pornography on the Global Internet: A Multi-Layered Approach.
 Zone Key Tool,ADDRESSES,DNS Security
+Information Technology and Innovation Foundation,ADDRESSES,Broadband Promotion
+The Berkman Center,ADDRESSES,Broadband Promotion
+Telecommunications Equality Project,ADDRESSES,Broadband Promotion
+Stolen innocence: the online exploitation of children,ADDRESSES,Child Pornography
+The New York Law School Impact Center for Public Interest Law,ADDRESSES,Child Pornography
+The World Bank,ADDRESSES,Broadband Promotion
+U.S. Agency for International Development,ADDRESSES,Broadband Promotion
+European Commission Directorate General Internal Market and Services,ADDRESSES,Internet Gambling
+Don't You Forget About Me YouTube Channel,ADDRESSES,Child Pornography
