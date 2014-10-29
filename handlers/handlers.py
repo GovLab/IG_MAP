@@ -43,30 +43,25 @@ class MainHandler(BaseHandler):
             google_analytics_id=google_analytics_id,
         )
     def post(self):
-        query = self.get_argument("query", None)
-        query = self.application.query_builder.build(query)
-        tx = session.create_transaction()
-        tx.append(query)
-        results = tx.execute()
-        nodes = {}
+        query_string = self.get_argument("query", None)
+        query_string = self.application.query_builder.build(query_string)
+        query = neo4j.CypherQuery(graph_db, query_string)
+        results = query.execute().data
+        start = set([r[0].start_node for r in results])
+        end = set([r[0].end_node for r in results])
+        nodes_to_keep = list(start.union(end))
+        nodes = []
+        for n in nodes_to_keep:
+            nodes.append({
+                "name":n['name'].encode('utf-8'), 
+                "group":n['type'].encode('utf-8'), 
+                "description":n['description'].encode('utf-8'), 
+                "node":int(n['node_id'])})
+        #links
         links = []
-        for r in results[0]:
-            nodes[r.values[0].start_node['node_id']] = {
-                "name":r.values[0].start_node['name'].encode('utf-8'), 
-                "group":r.values[0].start_node['type'].encode('utf-8'), 
-                "description":r.values[0].start_node['description'].encode('utf-8'), 
-                "node":r.values[0].start_node['node_id']}
-            description = r.values[0].end_node['description'].encode('utf-8') if 'description' in r.values[0].end_node else ' '
-            nodes[r.values[0].end_node['node_id']] = {
-                "name":r.values[0].end_node['name'].encode('utf-8'), 
-                "group":r.values[0].end_node['type'].encode('utf-8'), 
-                "description":description, 
-                "node":r.values[0].end_node['node_id']}
-            #nodes2 = [dict(t) for t in set([tuple(d.items()) for d in nodes2])]
-            #nodes2 = list(set(nodes))
-            links.append({"source":r.values[0].start_node['node_id'], "target":r.values[0].end_node['node_id']})
-        nodes = nodes.values()
-        self.write({"nodes":nodes, "links":links, "query":query})
+        for r in results:
+            links.append({"source":int(r[0].start_node['node_id']), "target":int(r[0].end_node['node_id'])})
+        self.write({"nodes":nodes, "links":links, "query":query_string})
 
 
 

@@ -71,9 +71,9 @@ class QueryBuilder(object):
             for word in q[rel_word+1:]:
                 if any(word.lower() in s for s in iss['synonyms']):
                     issue = iss['issue']
-        logging.info(rel)
-        logging.info(issue)
-        logging.info(cat)
+        info(rel)
+        info(issue)
+        info(cat)
         return "MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type=\""+ cat +"\" AND m.name=\""+ issue +"\" RETURN DISTINCT r, n"
 
 class DataLoader(object):
