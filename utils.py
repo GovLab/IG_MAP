@@ -177,48 +177,13 @@ class DataLoader(object):
         results = index.get("name",node_name)[0]
         return results
 
-    # #reads a file and makes a list of all the different types of objects and turns them into indexes.
-    # def generate_node_indeces_from_file(self, filename):
-    #     with open(filename, mode="r") as infile:
-    #         reader = csv.reader(infile)
-    #         types = []
-    #         for row in reader:
-    #             if row[1] != "name":
-    #                 types.append(row[2])
-    #             else:
-    #                 field_names = row
-    #         types = list(set(types))
-    #         for type_ in types:
-    #             graph_db.get_or_create_index(neo4j.Node, type_)
-    #         return field_names
 
-    # def load_nodes_from_file(self, filename):
-    #     field_names = generate_node_indeces_from_file("static/files/nodes.csv")
-    #     batch = neo4j.WriteBatch(graph_db)
-    #     with open(filename, mode="r") as infile:
-    #         reader = csv.reader(infile)
-    #         for row in reader:
-    #             new = {}
-    #             if row[1] !="name":
-    #                 for i in range(0, len(row)):
-    #                     new[field_names[i]] = row[i]
-    #                 new_node = batch.create(node(new))
-    #                 index = graph_db.get_index(neo4j.Node, new['type'])
-    #                 batch.add_indexed_node(index, "name", new['name'], new_node)
-    #                 batch.add_labels(new_node, new['type'])
-    #     batch.submit()
 
-    # def generate_relationships_indeces_from_file(self, filename):
-    #     batch = neo4j.WriteBatch(graph_db)
-    #     with open(filename, mode="r") as infile:
-    #         reader = csv.reader(infile)
-    #         relationship_types = []
-    #         for row in reader:
-    #             relationship_types.append(row[1])
-    #         relationship_types = list(set(relationship_types))
-    #     for r in relationship_types:
-    #         graph_db.get_or_create_index(neo4j.Relationship, r)
-    #     return relationship_types
+
+
+
+
+
 
 
 

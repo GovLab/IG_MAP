@@ -17,7 +17,8 @@ class MainHandler(BaseHandler):
         #----------------------------------QUERY
         tic = timeit.default_timer()
         if self.get_argument("display", None) == 'all':
-            query_string = "START r=rel(*) RETURN r"
+            query_string = """MATCH (n)-[r]-(m) 
+                RETURN n, n.node_id, n.name, n.type, n.description, m.node_id, m.name, m.type, m.description"""
         else:
             query_string = """MATCH (n)-[r:ADDRESSES]->(m) 
                             WHERE n.type=\"Actor\" AND m.name=\"Child Pornography\" 
@@ -36,12 +37,11 @@ class MainHandler(BaseHandler):
                         "name":str(r.values[2].encode('ascii', "ignore")).strip(),
                         "group":str(r.values[3].encode('ascii', "ignore")).strip(),
                         "description":str(r.values[4].encode('ascii', "ignore")).strip()})
-            if len(r.values) > 4:
-                nodes_unsorted.append({
-                            "node":int(r.values[5]),
-                            "name":str(r.values[6].encode('ascii', "ignore")).strip(),
-                            "group":str(r.values[7].encode('ascii', "ignore")).strip(),
-                            "description":str(r.values[8].encode('ascii', "ignore")).strip()})
+            nodes_unsorted.append({
+                        "node":int(r.values[5]),
+                        "name":str(r.values[6].encode('ascii', "ignore")).strip(),
+                        "group":str(r.values[7].encode('ascii', "ignore")).strip(),
+                        "description":str(r.values[8].encode('ascii', "ignore")).strip()})
             links.append({"source":int(r.values[1]), "target":int(r.values[5])})
         nodes = [dict(t) for t in set([tuple(d.items()) for d in nodes_unsorted])]
         logging.info(len(nodes))
