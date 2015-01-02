@@ -16,13 +16,17 @@ class MainHandler(BaseHandler):
             google_analytics_id = False
         #----------------------------------QUERY
         tic = timeit.default_timer()
-        if self.get_argument("display", None) == 'all':
+        if not self.get_argument("display", None):
             query_string = """MATCH (n)-[r]-(m) 
-                RETURN n, n.node_id, n.name, n.type, n.description, m.node_id, m.name, m.type, m.description"""
+                RETURN n, n.node_id, n.name, n.type, n.description, m.node_id, 
+                m.name, m.type, m.description"""
         else:
             query_string = """MATCH (n)-[r:ADDRESSES]->(m) 
-                            WHERE n.type=\"Actor\" AND m.name=\"Child Pornography\" 
-                            RETURN r, n.node_id, n.name, n.type, n.description, m.node_id, m.name, m.type, m.description"""
+                            WHERE n.type=\"Actor\" 
+                            AND m.name=\"Child Pornography\" 
+                            RETURN r, n.node_id, n.name, n.type, 
+                            n.description, m.node_id, m.name, m.type, 
+                            m.description"""
         query = neo4j.CypherQuery(graph_db, query_string)
         results = query.execute().data
         toc = timeit.default_timer()
@@ -34,16 +38,26 @@ class MainHandler(BaseHandler):
         for r in results:
             nodes_unsorted.append({
                         "node":int(r.values[1]),
-                        "name":str(r.values[2].encode('ascii', "ignore")).strip(),
-                        "group":str(r.values[3].encode('ascii', "ignore")).strip(),
-                        "description":str(r.values[4].encode('ascii', "ignore")).strip()})
+                        "name":str(r.values[2]
+                            .encode('ascii', "ignore")).strip(),
+                        "group":str(r.values[3]
+                            .encode('ascii', "ignore")).strip(),
+                        "description":str(r.values[4]
+                            .encode('ascii', "ignore")).strip()})
             nodes_unsorted.append({
                         "node":int(r.values[5]),
-                        "name":str(r.values[6].encode('ascii', "ignore")).strip(),
-                        "group":str(r.values[7].encode('ascii', "ignore")).strip(),
-                        "description":str(r.values[8].encode('ascii', "ignore")).strip()})
-            links.append({"source":int(r.values[1]), "target":int(r.values[5])})
-        nodes = [dict(t) for t in set([tuple(d.items()) for d in nodes_unsorted])]
+                        "name":str(r.values[6]
+                            .encode('ascii', "ignore")).strip(),
+                        "group":str(r.values[7]
+                            .encode('ascii', "ignore")).strip(),
+                        "description":str(r.values[8]
+                            .encode('ascii', "ignore")).strip()})
+            links.append({
+                "source":int(r.values[1]), 
+                "target":int(r.values[5])
+            })
+        nodes = [dict(t) 
+            for t in set([tuple(d.items()) for d in nodes_unsorted])]
         logging.info(len(nodes))
         toc = timeit.default_timer()
         node_sort_time = toc - tic
@@ -75,7 +89,10 @@ class MainHandler(BaseHandler):
         #links
         links = []
         for r in results:
-            links.append({"source":int(r[0].start_node['node_id']), "target":int(r[0].end_node['node_id'])})
+            links.append({
+                "source":int(r[0].start_node['node_id']), 
+                "target":int(r[0].end_node['node_id'])
+            })
         self.write({"nodes":nodes, "links":links, "query":query_string})
 
 
@@ -86,5 +103,6 @@ class LoadHandler(BaseHandler):
         node_file_path = "static/files/nodes.csv"
         relationship_file_path = "static/files/relationships.csv"
         self.application.data.load_nodes_from_file(node_file_path)
-        self.application.data.load_relationships_from_file(relationship_file_path, node_file_path)
+        self.application.data.load_relationships_from_file(
+            relationship_file_path, node_file_path)
         self.write("success")

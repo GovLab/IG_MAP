@@ -25,34 +25,55 @@ issue_list = [{
             "issue":"Internet Gambling",
             "synonyms":["internet gambling","gambling"]
         }]
-relationships = ["address", "addresses" "deals", "deal", "attends", "attend" "focuses", "focus" "undertakes", "research", "tackles", "tackle", "concerning" "sees", "about", "on"]
+relationships = [
+                "address", "addresses" "deals", "deal", "attends", 
+                "attend" "focuses", "focus" "undertakes", "research", 
+                "tackles", "tackle", "concerning" "sees", "about", "on"]
 type_list = [{
-            "synonyms": ["initiatives", "events", "conferences", "parties", "proposal", "plans", "schemes", "strategies"],
+            "synonyms": [
+                "initiatives", "events", "conferences", "parties", "proposal", 
+                "plans", "schemes", "strategies"],
             "type":"Initiatives & Events"
         },
         {
-            "synonyms": ["laws", "policies", "rules", "bylaws", "bills", "decrees", "resolutions", "orders", "procedures"],
+            "synonyms": [
+                "laws", "policies", "rules", "bylaws", "bills", "decrees", 
+                "resolutions", "orders", "procedures"],
             "type":"Laws & Policies"
         },
         {
-            "synonyms": ["organizations", "groups", "firm", "corporation", "association", "society", "institutions", "people", "leaders", "individuals", "humans"],
+            "synonyms": [
+                "organizations", "groups", "firm", "corporation", 
+                "association", "society", "institutions", "people", 
+                "leaders", "individuals", "humans"],
             "type":"Actor"
         }, 
         {
-            "synonyms": ["research", "investigations", "studies", "study", "findings", "experiments", "analysis", "support", "backing"],
+            "synonyms": [
+                "research", "investigations", "studies", "study", 
+                "findings", "experiments", "analysis", "support", "backing"],
             "type":"Research & Advocacy"
         },
         {
-            "synonyms": ["standards", "protocols", "norms", "guidelines", "criteria", "norms"],
+            "synonyms": [
+                "standards", "protocols", "norms", "guidelines", 
+                "criteria", "norms"],
             "type":"Standards"
         },
         {
-            "synonyms": ["tools", "information", "applications", "apps", "instruments", "materials"],
+            "synonyms": [
+                "tools", "information", "applications", "apps", 
+                "instruments", "materials"],
             "type":"Tools & Resources"
         }
         ]
-TYPES = ["Actor", "Person", "Initiatives and Events", "Issue", "Laws and Policies", "Research and Advocacy", "Standards", "Tools and Resources"]
-field_names = ["node_id", "name", "type", "description", "abbrev", "url", "contact_info", "year_founded", "date_start", "date_end", "sphere", "recurs", "region", "country", "state", "city"]
+TYPES = [
+    "Actor", "Person", "Initiatives and Events", "Issue", "Laws and Policies", 
+    "Research and Advocacy", "Standards", "Tools and Resources"]
+field_names = [
+    "node_id", "name", "type", "description", "abbrev", "url", "contact_info", 
+    "year_founded", "date_start", "date_end", "sphere", "recurs", "region", 
+    "country", "state", "city"]
 
 
 
@@ -74,7 +95,8 @@ class QueryBuilder(object):
         info(rel)
         info(issue)
         info(cat)
-        return "MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type=\""+ cat +"\" AND m.name=\""+ issue +"\" RETURN DISTINCT r, n"
+        return '''MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type=\""+ cat +"\" 
+            AND m.name=\""+ issue +"\" RETURN DISTINCT r, n'''
 
 class DataLoader(object):
     @classmethod
@@ -105,7 +127,8 @@ class DataLoader(object):
                         new[field_names[i]] = row[i].decode('utf-8').strip()
                     new_node = batch.create(node(new))
                     index = graph_db.get_index(neo4j.Node, new['type'])
-                    batch.add_indexed_node(index, "name", new['name'].strip(), new_node)
+                    batch.add_indexed_node(index, "name", 
+                        new['name'].strip(), new_node)
                     batch.add_labels(new_node, new['type'])
                     num_nodes +=1
         info("Loaded: " + str(num_nodes) + " nodes.")
