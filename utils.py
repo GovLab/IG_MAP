@@ -14,7 +14,7 @@ issue_list = [{
         }, 
         {
             "issue":"IPv6 Adoption", 
-            "synonyms":["ipv6","ipv6 adoption", "ip"]
+            "synonyms":["ipv6","ipv6 adoption", "ip", "ip v6"]
         }, {
             "issue":"Broadband Promotion", 
             "synonyms":["broadband","broadband promotion"]
@@ -28,7 +28,7 @@ issue_list = [{
 relationships = [
                 "address", "addresses" "deals", "deal", "attends", 
                 "attend" "focuses", "focus" "undertakes", "research", 
-                "tackles", "tackle", "concerning" "sees", "about", "on"]
+                "tackles", "tackle", "concerning" "sees", "about", "on", "study"]
 type_list = [{
             "synonyms": [
                 "initiatives", "events", "conferences", "parties", "proposal", 
@@ -95,8 +95,9 @@ class QueryBuilder(object):
         info(rel)
         info(issue)
         info(cat)
-        return '''MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type=\""+ cat +"\" 
-            AND m.name=\""+ issue +"\" RETURN DISTINCT r, n'''
+        query = 'MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type="{}"'.format(cat)
+        query+= 'AND m.name="{}" RETURN DISTINCT r, n'.format(issue)
+        return query
 
 class DataLoader(object):
     @classmethod
