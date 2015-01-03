@@ -130,9 +130,11 @@ $('#container').on("click", "#submit", function() {
 		    $(".error_message").text("Something went wrong :(").show().delay(5000).fadeOut();
 		},
 		beforeSend: function(xhr, settings) {
+			$(".error_message").text("Searching...").show().delay(5000).fadeOut();
 			console.log(query);
 		},
 		success: function(response) {
+			$(".error_message").text("").show().delay(5000).fadeOut();
 			console.log(response['nodes']);
 			graph = {
 		  		"nodes":response['nodes'],

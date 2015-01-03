@@ -26,7 +26,7 @@ issue_list = [{
             "synonyms":["internet gambling","gambling"]
         }]
 relationships = [
-                "address", "addresses" "deals", "deal", "attends", 
+                "address", "addresses", "deals", "deal", "attends", 
                 "attend" "focuses", "focus" "undertakes", "research", 
                 "tackles", "tackle", "concerning" "sees", "about", "on", "study"]
 type_list = [{
@@ -43,7 +43,7 @@ type_list = [{
         },
         {
             "synonyms": [
-                "organizations", "groups", "firm", "corporation", 
+                "who", "organizations", "groups", "firm", "corporation", 
                 "association", "society", "institutions", "people", 
                 "leaders", "individuals", "humans"],
             "type":"Actor"
@@ -95,8 +95,11 @@ class QueryBuilder(object):
         info(rel)
         info(issue)
         info(cat)
-        query = 'MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type="{}"'.format(cat)
-        query+= 'AND m.name="{}" RETURN DISTINCT r, n'.format(issue)
+        query = 'MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type="{}" '.format(cat)
+        query += 'AND m.name="{}" '.format(issue)
+        query += '''RETURN r, n.node_id, n.name, n.type, 
+                            n.description, m.node_id, m.name, m.type, 
+                            m.description'''
         return query
 
 class DataLoader(object):

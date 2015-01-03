@@ -76,23 +76,32 @@ class MainHandler(BaseHandler):
         query_string = self.application.query_builder.build(query_string)
         query = neo4j.CypherQuery(graph_db, query_string)
         results = query.execute().data
-        start = set([r[0].start_node for r in results])
-        end = set([r[0].end_node for r in results])
-        nodes_to_keep = list(start.union(end))
-        nodes = []
-        for n in nodes_to_keep:
-            nodes.append({
-                "name":n['name'].encode('utf-8'), 
-                "group":n['type'].encode('utf-8'), 
-                "description":n['description'].encode('utf-8'), 
-                "node":int(n['node_id'])})
-        #links
+        nodes_unsorted = []
         links = []
         for r in results:
+            nodes_unsorted.append({
+                        "node":int(r.values[1]),
+                        "name":str(r.values[2]
+                            .encode('ascii', "ignore")).strip(),
+                        "group":str(r.values[3]
+                            .encode('ascii', "ignore")).strip(),
+                        "description":str(r.values[4]
+                            .encode('ascii', "ignore")).strip()})
+            nodes_unsorted.append({
+                        "node":int(r.values[5]),
+                        "name":str(r.values[6]
+                            .encode('ascii', "ignore")).strip(),
+                        "group":str(r.values[7]
+                            .encode('ascii', "ignore")).strip(),
+                        "description":str(r.values[8]
+                            .encode('ascii', "ignore")).strip()})
             links.append({
-                "source":int(r[0].start_node['node_id']), 
-                "target":int(r[0].end_node['node_id'])
+                "source":int(r.values[1]), 
+                "target":int(r.values[5])
             })
+        nodes = [dict(t) 
+            for t in set([tuple(d.items()) for d in nodes_unsorted])]
+        logging.info(len(nodes))
         self.write({"nodes":nodes, "links":links, "query":query_string})
 
 
