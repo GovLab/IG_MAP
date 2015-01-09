@@ -8,6 +8,19 @@ service_root = neo4j.ServiceRoot(URI(graphenedb_url).resolve("/"))
 graph_db = service_root.graph_db
 
 
+class MainHandler2(BaseHandler):
+    def get(self, display=None):
+        if 'GOOGLEANALYTICSID' in os.environ:
+            google_analytics_id = os.environ['GOOGLEANALYTICSID']
+        else:
+            google_analytics_id = False
+        self.render(
+            "index2.html",
+            page_title='Internet Governance Map',
+            page_heading='Map of Internet Governance',
+            google_analytics_id=google_analytics_id
+        )
+
 class MainHandler(BaseHandler):
     def get(self, display=None):
         if 'GOOGLEANALYTICSID' in os.environ:

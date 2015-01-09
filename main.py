@@ -31,7 +31,8 @@ class Application(tornado.web.Application):
         self.data = DataLoader()
         handlers = [
             (r"/?", MainHandler),
-            (r"/load/?", LoadHandler)
+            (r"/2/?", MainHandler2)
+            #(r"/load/?", LoadHandler)
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),

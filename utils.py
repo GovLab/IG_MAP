@@ -10,7 +10,7 @@ from logging import info
 
 issue_list = [{
             "issue":"DNS Security",
-            "synonyms":["dns","dns security", "dnssec"]
+            "synonyms":["dns", "dns security", "dnssec"]
         }, 
         {
             "issue":"IPv6 Adoption", 
@@ -28,7 +28,8 @@ issue_list = [{
 relationships = [
                 "address", "addresses", "deals", "deal", "attends", 
                 "attend" "focuses", "focus" "undertakes", "research", 
-                "tackles", "tackle", "concerning" "sees", "about", "on", "study"]
+                "tackles", "tackle", "concerning" "sees", "about", "on", "study",
+                "exist"]
 type_list = [{
             "synonyms": [
                 "initiatives", "events", "conferences", "parties", "proposal", 
@@ -80,6 +81,7 @@ field_names = [
 class QueryBuilder(object):
     def build(self, query):
         q = query.split()
+        q = [re.sub('[^A-Za-z0-9]+', '', word) for word in q]
         rel = [s for s in relationships if s in q]
         rel_word = q.index(rel[0])
         cat = ''

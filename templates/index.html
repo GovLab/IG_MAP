@@ -115,9 +115,12 @@ svg {
 <script>
 
 var graph = {
-  "nodes":{{nodes}},
-  "links":{{links}}
+  "nodes": {{nodes}},
+  "links": {{links}}
 }
+
+
+
 
 $('#container').on("click", "#submit", function() {
 	var query =  $('#query_input').val();
@@ -149,7 +152,7 @@ $('#container').on("click", "#submit", function() {
 
 
 var w = $('.graph').width();
-var h = 600;
+var h = $('.graph').height();
 
 var nodeMap = {};
 
@@ -163,7 +166,7 @@ graph.links.forEach(function(l) {
 var color = d3.scale.category20().domain(function(d) { return graph.nodes.group; });
 
 var force = d3.layout.force()
-    .charge(-60)
+    .charge(-40)
     .linkDistance(200)
     .size([w, h]);
 
