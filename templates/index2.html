@@ -1,277 +1,260 @@
-{% extends "main.html" %}
-{% autoescape None %}
+<!DOCTYPE html>
+<meta charset="utf-8">
 
-{% block body %}
-
-<style>
-body {
-	background-color: black;
-	font-family: sans-serif, Arial, Helvetica;
-	color: #f4f4f4;
-}
-
-h1 {
-	color: #f4f4f4;
-}
-
-p {
-	color: #f4f4f4;
-}
-
-.node {
-  stroke: #fff;
-  stroke-width: 1px;
-}
-
-.link {
-  stroke: #999;
-  stroke-opacity: .6;
-}
-
-.graph_area {
-	width: 100%;
-}
-
-.node_info {
-	width: 30%;
-	height: 600px;
-	float: left;
-}
-
-.node_name {
-	font-size: 2em;
-	margin-bottom: 16px;
-}
-
-.graph {
-	width: 70%;
-	height: 600px;
-	float: right;
-}
-
-svg {
-	top: 0px;
-	left: 0px;
-}
-
-#query_input {
-	width: 60%;
-	line-height: 1.25;
-	padding: .556em .5em;
-	border: 1px solid transparent;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-	vertical-align: top;
-	font-size: 1.125em;
-	background: #f2f2f2;
-	border-color: transparent;
-	display: inline-block;
-}
-
-#submit {
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-	display: inline-block;
-	font-size: 1.125em;
-	border:	1px solid #de3723;
-	padding: .556em 1em;
-	background: linear-gradient(to bottom,#fd4f00 0%,#de3723 100%);
-	margin: 0;
-	margin-left: 20px;
-	position: static;
-	top: auto;
-	right: auto;
-	height: auto;
-	line-height: 1.3333em;
-	color: white;
-}
-
-.error_message {
-	margin-left: 10px;
-}
-
-</style>
-
-<div class="header">
-	<h1> {{page_heading}} </h1>
-</div>
-<div class="graph_area">
-	<div class="node_info">
-		<div class="node_name"></div>
-		<div class="node_description"></div>
-	</div>
-	<div class="graph"></div>
-</div>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>     <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>     <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Map of Internet Governance</title>
 
 
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <style>
+		body {
+			background-color: black;
+			font-family: sans-serif, Arial, Helvetica;
+			color: #f4f4f4;
+		}
+
+		h1 {
+			color: #f4f4f4;
+		}
+
+		p {
+			color: #f4f4f4;
+		}
+
+		.node {
+		  stroke: #fff;
+		  stroke-width: 1px;
+		}
+
+		.link {
+		  stroke: #999;
+		  stroke-opacity: .6;
+		}
+
+		.graph_area {
+			width: 100%;
+		}
+
+		.node_info {
+			width: 30%;
+			height: 600px;
+			float: left;
+		}
+
+		.node_name {
+			font-size: 2em;
+			margin-bottom: 16px;
+		}
+
+		.graph {
+			width: 70%;
+			height: 600px;
+			float: right;
+		}
+
+		svg {
+			top: 0px;
+			left: 0px;
+		}
+
+	</style>
+</head>
+<body>
+    <header>
+    </header>
+    <div id="main">
+        <div id="container">
+			<div class="header">
+				<h1> {{page_heading}} </h1>
+			</div>
+			<div class="graph_area">
+				<div class="node_info">
+					<div class="node_name"></div>
+					<div class="node_description"></div>
+				</div>
+				<div class="graph"></div>
+			</div>
+		</div>
+    </div>
+</body>
+<footer>
+</footer>
+ 
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
+   
+</html>
+
 <script>
 
-d3.json("static/files/associations.json", function(error, graph) {
-	if (error) return console.warn(error);
+	d3.json("static/files/associations.json", function(error, graph) {
+		if (error) return console.warn(error);
 
-	function updateWindow(){
-	    x = w.innerWidth || e.clientWidth || g.clientWidth;
-	    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+		function updateWindow(){
+		    x = w.innerWidth || e.clientWidth || g.clientWidth;
+		    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
 
-	    svg.attr("width", x).attr("height", y);
-	}
-	window.onresize = updateWindow;
+		    svg.attr("width", x).attr("height", y);
+		}
+		window.onresize = updateWindow;
 
-	function dblclick(d) {
-	  d3.select(this).classed("fixed", d.fixed = false);
-	}
+		function dblclick(d) {
+		  d3.select(this).classed("fixed", d.fixed = false);
+		}
 
-	function dragstart(d) {
-	  d3.select(this).classed("fixed", d.fixed = true);
-	}
-
-
-	function redraw() {
-	  svg.attr("transform",
-	      "translate(" + d3.event.translate + ")"
-	      + " scale(" + d3.event.scale + ")");
-	}
-
-	function dragstart(d, i) {
-	    force.stop() // stops the force auto positioning before you start dragging
-	}
-
-	function dragmove(d, i) {
-	    d.px += d3.event.dx;
-	    d.py += d3.event.dy;
-	    d.x += d3.event.dx;
-	    d.y += d3.event.dy; 
-	    tick(); // this is the key to make it work together with updating both px,py,x,y on d !
-	}
-
-	function dragend(d, i) {
-	    d.fixed = true; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
-	    tick();
-	    force.resume();
-	}
-
-	function double_click(d, i) {
-		d.fixed = false;
-	}
-
-	function tick() {
-		link.attr("x1", function(d) { return w/2 + d.source.x; })
-			.attr("y1", function(d) { return h/2 + d.source.y; })
-			.attr("x2", function(d) { return w/2 + d.target.x; })
-			.attr("y2", function(d) { return h/2 + d.target.y; });
-
-		node.attr("cx", function(d) { return w/2 + d.x; })
-			.attr("cy", function(d) { return h/2 + d.y; });
-	}
-
-	var w = window,
-	    d = document,
-	    e = d.documentElement,
-	    g = $('.graph')[0],
-	    x = w.innerWidth || e.clientWidth || g.clientWidth,
-	    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+		function dragstart(d) {
+		  d3.select(this).classed("fixed", d.fixed = true);
+		}
 
 
-	var w = $('.graph').width();
-	var h = $('.graph').height();
+		function redraw() {
+		  svg.attr("transform",
+		      "translate(" + d3.event.translate + ")"
+		      + " scale(" + d3.event.scale + ")");
+		}
 
-	var nodeMap = {};
-	var frozen = false;
+		function dragstart(d, i) {
+		    force.stop() 
+		}
 
-	graph.nodes.forEach(function(d) { nodeMap[d.node] = d; });
+		function dragmove(d, i) {
+		    d.px += d3.event.dx;
+		    d.py += d3.event.dy;
+		    d.x += d3.event.dx;
+		    d.y += d3.event.dy; 
+		    tick(); 
+		}
 
-	graph.links.forEach(function(l) {
-	    l.source = nodeMap[l.source];
-	    l.target = nodeMap[l.target];
-	})
+		function dragend(d, i) {
+		    d.fixed = true; 
+		    tick();
+		    force.resume();
+		}
 
-	var color = d3.scale.category20().domain(function(d) { return graph.nodes.group; });
+		function double_click(d, i) {
+			d.fixed = false;
+		}
 
-	var force = d3.layout.force()
-	    .charge(-40)
-	    .gravity(.05)
-	    .linkDistance(100)
-	    .size([w, h]);
+		function tick() {
+			link.attr("x1", function(d) { return w/2 + d.source.x; })
+				.attr("y1", function(d) { return h/2 + d.source.y; })
+				.attr("x2", function(d) { return w/2 + d.target.x; })
+				.attr("y2", function(d) { return h/2 + d.target.y; });
 
-	var svg = d3.select(".graph").append("svg:svg")
-	    .attr("width", x)
-	    .attr("height", y)
-	    .append('svg:g')
-	    .attr("pointer-events", "all")
-	    //.call(d3.behavior.zoom().on("zoom", redraw))
-	    .append('svg:g');
+			node.attr("cx", function(d) { return w/2 + d.x; })
+				.attr("cy", function(d) { return h/2 + d.y; });
+		}
 
-	var background = svg.append("rect")
-		.attr("width", w)
-		.attr("height", h)
-		.attr("fill", "#000");
+		var w = window,
+		    d = document,
+		    e = d.documentElement,
+		    g = $('.graph')[0],
+		    x = w.innerWidth || e.clientWidth || g.clientWidth,
+		    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
 
-	force = d3.layout.force()
-	      .nodes(graph.nodes)
-	      .links(graph.links)
-	      .start();
 
-	var link = svg.selectAll(".link")
-		.data(graph.links)
-		.enter().append("line")
-		.attr("class", "link")
-		.style("stroke-width", 1);
+		var w = $('.graph').width();
+		var h = $('.graph').height();
 
-	var node_drag = d3.behavior.drag()
-	    .on("dragstart", dragstart)
-	    .on("drag", dragmove)
-	    .on("dragend", dragend);
+		var nodeMap = {};
+		var frozen = false;
 
-	var node = svg.selectAll(".node")
-		.data(graph.nodes)
-		.enter().append("circle")
-		.attr("class", "node")
-		.attr("r", 5)
-		.style("fill", function(d) { return color(d.group); })
-		.on("dblclick", double_click)
-		.call(node_drag);
+		graph.nodes.forEach(function(d) { nodeMap[d.node] = d; });
 
-	node.on("click", function(d) {
-		if (d3.event.defaultPrevented) return;
-		frozen = true;
-		d3.selectAll('.node').attr('class', 'node')
-		d3.selectAll('.node').attr('r', 5);
-		d3.select(this).attr('class', "node active-node");
-		d3.select(this).attr('r', 10);
-		$('.node_name').text(d.name);
-		$('.node_description').text(d.description);
-	});
+		graph.links.forEach(function(l) {
+		    l.source = nodeMap[l.source];
+		    l.target = nodeMap[l.target];
+		})
 
-	node.on("mouseover", function(d) {
-		if (!frozen) {
+		var color = d3.scale.category20().domain(function(d) { return graph.nodes.group; });
+
+		var force = d3.layout.force()
+		    .charge(-40)
+		    .gravity(.05)
+		    .linkDistance(100)
+		    .size([w, h]);
+
+		var svg = d3.select(".graph").append("svg:svg")
+		    .attr("width", x)
+		    .attr("height", y)
+		    .append('svg:g')
+		    .attr("pointer-events", "all")
+		    //.call(d3.behavior.zoom().on("zoom", redraw))
+		    .append('svg:g');
+
+		var background = svg.append("rect")
+			.attr("width", w)
+			.attr("height", h)
+			.attr("fill", "#000");
+
+		force = d3.layout.force()
+		      .nodes(graph.nodes)
+		      .links(graph.links)
+		      .start();
+
+		var link = svg.selectAll(".link")
+			.data(graph.links)
+			.enter().append("line")
+			.attr("class", "link")
+			.style("stroke-width", 1);
+
+		var node_drag = d3.behavior.drag()
+		    .on("dragstart", dragstart)
+		    .on("drag", dragmove)
+		    .on("dragend", dragend);
+
+		var node = svg.selectAll(".node")
+			.data(graph.nodes)
+			.enter().append("circle")
+			.attr("class", "node")
+			.attr("r", 5)
+			.style("fill", function(d) { return color(d.group); })
+			.on("dblclick", double_click)
+			.call(node_drag);
+
+		node.on("click", function(d) {
+			if (d3.event.defaultPrevented) return;
+			frozen = true;
+			d3.selectAll('.node').attr('class', 'node')
+			d3.selectAll('.node').attr('r', 5);
+			d3.select(this).attr('class', "node active-node");
+			d3.select(this).attr('r', 10);
 			$('.node_name').text(d.name);
 			$('.node_description').text(d.description);
-		}
-		console.log("in here")
+		});
+
+		node.on("mouseover", function(d) {
+			if (!frozen) {
+				$('.node_name').text(d.name);
+				$('.node_description').text(d.description);
+			}
+			console.log("in here")
+		});
+
+		background.on('click', function(d) {
+			frozen = false;
+			d3.selectAll('.node').attr('class', 'node')
+			d3.selectAll('.node').attr('r', 5);
+			$('.node_name').text('');
+			$('.node_description').text('');
+		});
+
+		var nodeTitles = node.append("title")
+			.text(function(d) { return d.name; });
+
+		force.on("tick", tick);
+
 	});
-
-	background.on('click', function(d) {
-		frozen = false;
-		d3.selectAll('.node').attr('class', 'node')
-		d3.selectAll('.node').attr('r', 5);
-		$('.node_name').text('');
-		$('.node_description').text('');
-	});
-
-	var nodeTitles = node.append("title")
-		.text(function(d) { return d.name; });
-
-	force.on("tick", tick);
-
-});
 
 </script>
 
-
-
-{% end %}
