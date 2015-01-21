@@ -1,15 +1,111 @@
-/* 
-	Sample CSS file to go with the Heroku/Tornado setup
+body {
+	background-color: white;
+	font-family: sans-serif, Arial, Helvetica;
+	color: #0C090A;
+}
 
-	Author: Michael Dory
-	11.12.11, updated 11.24.12
-*/
+h1 {
+	color: #0C090A;
+}
 
+p {
+	color: #0C090A;
+}
 
-/* main */
+/*.node {
+  stroke: #fff;
+  stroke-width: 1px;
+}*/
 
-#main {
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
 
+#info_area {
+	display: inline-block;
+	width: 30%;
+	margin-top: 10px;
+}
+
+#graph_area {
+	width: 70%;
+	height: auto;
+}
+
+#node_info {
+	height: 350px;
+	width: 100%;
+	float: left;
+	overflow-y: scroll;
+	border: solid black 3px;
+	padding: 10px
+}
+
+#related_node_info {
+	height: 350px;
+	width: 100%;
+	float: left;
+	overflow-y: scroll;
+	border: solid black 3px;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+#node_name, #related_node_name {
+	font-size: 2em;
+	margin-bottom: 16px;
+}
+
+#graph {
+	width: 68.5%;
+	height: 600px;
+	float: right;
+}
+
+svg {
+	top: 0px;
+	left: 0px;
+}
+
+#query_input {
+	width: 60%;
+	line-height: 1.25;
+	padding: .556em .5em;
+	border: 1px solid transparent;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	vertical-align: top;
+	font-size: 1.125em;
+	background: #f2f2f2;
+	border-color: transparent;
+	display: inline-block;
+}
+
+#submit {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	display: inline-block;
+	font-size: 1.125em;
+	border:	1px solid #de3723;
+	padding: .556em 1em;
+	background: linear-gradient(to bottom,#fd4f00 0%,#de3723 100%);
+	margin: 0;
+	margin-left: 20px;
+	position: static;
+	top: auto;
+	right: auto;
+	height: auto;
+	line-height: 1.3333em;
+	color: white;
+}
+
+.error_message {
+	margin-left: 10px;
 }
 
 
