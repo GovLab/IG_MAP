@@ -94,7 +94,7 @@ class QueryBuilder(object):
             for word in q[rel_word+1:]:
                 if any(word.lower() in s for s in iss['synonyms']):
                     issue = iss['issue']
-        info(rel)
+        info(rel) #Relationship not used for now. 
         info(issue)
         info(cat)
         query = 'MATCH (n)-[r:ADDRESSES]->(m) WHERE n.type="{}" '.format(cat)

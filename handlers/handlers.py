@@ -33,13 +33,6 @@ class MainHandler(BaseHandler):
             query_string = """MATCH (n)-[r]-(m) 
                 RETURN n, n.node_id, n.name, n.type, n.description, m.node_id, 
                 m.name, m.type, m.description"""
-        else:
-            query_string = """MATCH (n)-[r:ADDRESSES]->(m) 
-                            WHERE n.type=\"Actor\" 
-                            AND m.name=\"Child Pornography\" 
-                            RETURN r, n.node_id, n.name, n.type, 
-                            n.description, m.node_id, m.name, m.type, 
-                            m.description"""
         query = neo4j.CypherQuery(graph_db, query_string)
         results = query.execute().data
         toc = timeit.default_timer()
